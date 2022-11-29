@@ -15,7 +15,7 @@ const Home = () => {
   const animatedItem = {
     0: useScrollFadeIn("up", 1, 0),
     1: useScrollFadeIn("up", 1, 0.2),
-    2: useScrollFadeIn("up", 1, 0.3),
+    2: useScrollFadeIn("up", 1, 0.2),
     3: useScrollFadeIn("up", 1, 0.3),
     4: useScrollFadeIn("up", 1, 0.3),
     5: useScrollFadeIn("up", 1, 0.3),
@@ -44,7 +44,9 @@ const Home = () => {
       <button onClick={() => handleClickNavLink(0)}>테스트용 버튼</button>
 
       <StyledFirst ref={heroRef}>
-        <Image src={Banner} margin-left="40px" alt="banner" />
+        <StyledBanner>
+          <Image src={Banner} margin-left="40px" alt="banner" />
+        </StyledBanner>
       </StyledFirst>
       <StyledSecond {...animatedItem[0]}>
         <ProjectFund />
@@ -52,7 +54,7 @@ const Home = () => {
       <StyledSecond {...animatedItem[1]}>
         <ChaingeFund />
       </StyledSecond>
-      <StyledSecond {...animatedItem[2]}>
+      <StyledSecond>
         <DescriptService />
       </StyledSecond>
       <StyledSecond {...animatedItem[3]}>
@@ -78,6 +80,10 @@ const StyledFirst = styled.div`
   align-items: center;
   justify-content: center;
 `;
+const StyledBanner = styled.div`
+  position: relative;
+`;
+
 const StyledSecond = styled.div`
   display: flex;
   align-items: center;

@@ -38,7 +38,15 @@ const Title = styled.div`
   font-weight: 900;
   font-size: 32px;
   line-height: 46px;
-  color: #483620;
+  background: linear-gradient(
+    to top,
+    #d16ba5 2.88%,
+    #86a8e7 52.04%,
+    #5ffbf1 97.27%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
   align-items: flex-start;
 `;
 

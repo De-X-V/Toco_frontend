@@ -1,7 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import useScrollFadeIn from "../../../src/hooks/useScrollFadeIn";
-
+import community1 from "../../../public/Community/community1.png";
+import community2 from "../../../public/Community/community2.png";
+import community3 from "../../../public/Community/community3.png";
+import community4 from "../../../public/Community/community4.png";
+import Image from "next/image";
 export default function Community() {
   return (
     <Wrap>
@@ -10,6 +14,7 @@ export default function Community() {
         <div>
           <SmallTitle>투코 커뮤니티 이해관계자</SmallTitle>
           <div>
+            <Image src={community1} margin-left="40px" alt="banner" />
             <TopSpan>기부자</TopSpan>
             <StyledSpan>
               기부자들은 커뮤니티 거버넌스를 통해 기부 대상자, 기부 물품
