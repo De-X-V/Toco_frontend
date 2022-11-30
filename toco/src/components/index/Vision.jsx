@@ -1,17 +1,54 @@
 import React from "react";
 import styled from "styled-components";
-import useScrollFadeIn from "../../../src/hooks/useScrollFadeIn";
+
+import vision1 from "../../../public/Vision/vision1.png";
+import vision2 from "../../../public/Vision/vision2.png";
+import vision3 from "../../../public/Vision/vision3.png";
+import vision4 from "../../../public/Vision/vision4.png";
+import vision5 from "../../../public/Vision/vision5.png";
+import Image from "next/image";
 
 export default function Vision() {
   return (
     <Wrap>
-      <StyledTitle>ToCo 프로젝트 VISION</StyledTitle>
+      <StyledTitle>TOcO 프로젝트 VISION</StyledTitle>
+
       <StyledDesWrap>
-        <SmallTitle>· 기부 생태계의 혁신</SmallTitle>
-        <SmallTitle>· 100% 신뢰할 수 있는 기부</SmallTitle>
-        <SmallTitle>· 사회적 불평등 해소</SmallTitle>
-        <SmallTitle>· 블록체인 기술의 진보</SmallTitle>
-        <SmallTitle>· 이해관계자들 간의 행복 선순환</SmallTitle>
+        <StyledDes>
+          <Image src={vision1} margin-left="40px" alt="banner" />
+          <SmallTitle>
+            100% <br />
+            신뢰할 수 있는 기부
+          </SmallTitle>
+        </StyledDes>
+        <StyledDes>
+          <Image src={vision2} margin-left="40px" alt="banner" />
+          <SmallTitle>
+            기부 생태계의 <br />
+            혁신
+          </SmallTitle>
+        </StyledDes>
+        <StyledDes>
+          <Image src={vision3} margin-left="40px" alt="banner" />
+          <SmallTitle>
+            사회적 불평등 <br />
+            해소
+          </SmallTitle>
+        </StyledDes>
+        <StyledDes>
+          <Image src={vision4} margin-left="40px" alt="banner" />
+          <SmallTitle>
+            블록체인 기술의
+            <br /> 진보
+          </SmallTitle>
+        </StyledDes>
+        <StyledDes>
+          <Image src={vision5} margin-left="40px" alt="banner" />
+          <SmallTitle>
+            이해관계자들 간의
+            <br /> 행복 선순환
+          </SmallTitle>
+        </StyledDes>
       </StyledDesWrap>
     </Wrap>
   );
@@ -23,7 +60,13 @@ const Wrap = styled.div`
   margin-top: 120px;
 `;
 const StyledDesWrap = styled.div`
-  text-align: center;
+  display: flex;
+`;
+const StyledDes = styled.div`
+  margin: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const SmallTitle = styled.div`
@@ -35,8 +78,6 @@ const SmallTitle = styled.div`
   font-size: 20px;
   line-height: 29px;
   text-align: center;
-
-  color: #44c144;
 `;
 const StyledTitle = styled.div`
   display: flex;
@@ -53,10 +94,6 @@ const StyledTitle = styled.div`
 
   text-align: center;
 
-  /* Muted Color */
-
-  color: #483620;
-
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  margin-bottom: 60px;
+  margin-bottom: 100px;
 `;

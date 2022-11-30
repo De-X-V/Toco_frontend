@@ -40,10 +40,6 @@ const StyledTitle = styled.div`
   /* identical to box height */
 
   text-align: center;
-
-  /* Muted Color */
-
-  color: #483620;
 `;
 const StyledInt = styled.div`
   margin-top: 8px;
@@ -58,10 +54,6 @@ const StyledInt = styled.div`
   /* identical to box height, or 24px */
 
   text-align: center;
-
-  /* Muted Color */
-
-  color: #483620;
 `;
 
 const TeamWrap = styled.div`

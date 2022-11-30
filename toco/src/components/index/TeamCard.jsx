@@ -28,10 +28,6 @@ const Name = styled.div`
   font-weight: 700;
   font-size: 24px;
   line-height: 30px;
-
-  /* Muted Color */
-
-  color: #483620;
 `;
 const Job = styled.div`
   /* Body/Large */
@@ -42,10 +38,6 @@ const Job = styled.div`
   font-size: 18px;
   line-height: 150%;
   /* identical to box height, or 27px */
-
-  /* Dark Green */
-
-  color: #20484f;
 `;
 
 export default TeamCard;

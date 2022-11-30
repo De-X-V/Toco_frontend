@@ -26,30 +26,28 @@ const StyledTitle = styled.div`
   /* identical to box height */
 
   text-align: center;
-
-  /* Muted Color */
-
-  color: #483620;
 `;
 const StyledButton = styled.button`
   margin-top: 116px;
   margin-bottom: 67px;
   /* Secondary Color */
-  width: 139px;
-  height: 58px;
-  background: #6d9886;
+  width: 161px;
+  height: 66px;
+  background: linear-gradient(
+    90deg,
+    #d16ba5 2.88%,
+    #86a8e7 52.04%,
+    #5ffbf1 97.27%
+  );
   border-radius: 8px;
 
   /* Body/Large */
 
   font-family: "Plus Jakarta Sans";
   font-style: normal;
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 150%;
-  /* identical to box height, or 27px */
-
-  /* Bright */
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 35px;
 
   color: #f7f7f7;
 `;
