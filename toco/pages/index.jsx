@@ -14,12 +14,12 @@ import Support from "../src/components/index/Support";
 const Home = () => {
   const animatedItem = {
     0: useScrollFadeIn("up", 1, 0),
-    1: useScrollFadeIn("up", 1, 0.2),
-    2: useScrollFadeIn("up", 1, 0.2),
-    3: useScrollFadeIn("up", 1, 0.3),
-    4: useScrollFadeIn("up", 1, 0.3),
-    5: useScrollFadeIn("up", 1, 0.3),
-    6: useScrollFadeIn("up", 1, 0.3),
+    1: useScrollFadeIn("up", 1, 0.1),
+    2: useScrollFadeIn("up", 1, 0.1),
+    3: useScrollFadeIn("up", 1, 0.1),
+    4: useScrollFadeIn("up", 1, 0.1),
+    5: useScrollFadeIn("up", 1, 0.1),
+    6: useScrollFadeIn("up", 1, 0.1),
   };
 
   const [currentVisibleIndex, setCurrentVisibleIndex] = useState(0);
@@ -54,7 +54,7 @@ const Home = () => {
       <StyledSecond {...animatedItem[1]}>
         <ChaingeFund />
       </StyledSecond>
-      <StyledSecond>
+      <StyledSecond {...animatedItem[2]}>
         <DescriptService />
       </StyledSecond>
       <StyledSecond {...animatedItem[3]}>
