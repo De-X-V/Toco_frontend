@@ -7,10 +7,18 @@ function ProjectFundList() {
     <Wrap>
       <Title>전체 프로젝트 펀딩</Title>
       <CardList>
-        <FundCard />
-        <FundCard />
-        <FundCard />
-        <FundCard />
+        <CardWrap>
+          <FundCard />
+        </CardWrap>
+        <CardWrap>
+          <FundCard />
+        </CardWrap>{" "}
+        <CardWrap>
+          <FundCard />
+        </CardWrap>{" "}
+        <CardWrap>
+          <FundCard />
+        </CardWrap>
       </CardList>
     </Wrap>
   );
@@ -26,9 +34,14 @@ const Title = styled.div`
   font-size: 32px;
   line-height: 46px;
   align-items: flex-start;
+  margin-bottom: 35px;
 `;
 const CardList = styled.div`
   display: flex;
+  flex-wrap: wrap;
+  padding: 24px 16px;
 `;
-
+const CardWrap = styled.div`
+  margin: 15px;
+`;
 export default ProjectFundList;
