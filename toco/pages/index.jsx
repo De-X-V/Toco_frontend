@@ -46,6 +46,11 @@ const Home = () => {
       <StyledFirst ref={heroRef}>
         <StyledBanner>
           <Image src={Banner} margin-left="40px" alt="banner" />
+          <StyledBannerDes>
+            모두와 함께 걷기 위한 기부,
+            <br />
+            투코는 그 기부를 투명하게 만듭니다.
+          </StyledBannerDes>
         </StyledBanner>
       </StyledFirst>
       <StyledSecond {...animatedItem[0]}>
@@ -83,12 +88,19 @@ const StyledFirst = styled.div`
 const StyledBanner = styled.div`
   position: relative;
 `;
+const StyledBannerDes = styled.div`
+  position: absolute;
+  left: 77px;
+  top: 40px;
+  font-weight: 900;
+  font-size: 40px;
+  line-height: 100px;
+`;
 
 const StyledSecond = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
 `;
-const StyledThird = styled.div``;
 
 export default Home;

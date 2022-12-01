@@ -25,7 +25,6 @@ export default function DescriptService() {
 const Wrap = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 120px;
 
   width: 1345px;
 `;

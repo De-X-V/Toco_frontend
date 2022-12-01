@@ -20,7 +20,7 @@ const StyledCard = styled.div`
   width: 350px;
   height: 276px;
   background: #ffffff;
-  border: 1px solid #edeef2;
+  border: 8px solid black;
   border-radius: 16px;
   flex-shrink: 0;
   position: relative;
@@ -30,6 +30,9 @@ const StyledDday = styled.p`
   width: 75px;
   height: 32px;
   position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   right: 0px;
   top: 0px;
   margin: 0;
