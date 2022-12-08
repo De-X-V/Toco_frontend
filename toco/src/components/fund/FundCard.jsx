@@ -1,28 +1,31 @@
 import React from "react";
 import styled from "styled-components";
 import Image from "next/image";
+import Link from "next/link";
 
 import Logo from "../../../public/logo.png";
 
 export default function FundCard() {
   return (
-    <StyledCard>
-      <Image src={Logo} width="350px" height="160px" />
-      <StyledDday>D-100</StyledDday>
-      <StyledDesWrap>
-        <StyledFundDes>
-          <StyledProjectName>프로젝트 펀딩 이름</StyledProjectName>
-          <StyledRange>
-            <StyledDate>모금 종료일 </StyledDate>
-            <StyledAmount> 목표 모금액</StyledAmount>
-          </StyledRange>
-        </StyledFundDes>
-        <StyledTag>
-          <Tag>tag1</Tag>
-          <Tag>tag2</Tag>
-        </StyledTag>
-      </StyledDesWrap>
-    </StyledCard>
+    <Link href="/FundDetail">
+      <StyledCard>
+        <Image src={Logo} width="350px" height="160px" />
+        <StyledDday>D-100</StyledDday>
+        <StyledDesWrap>
+          <StyledFundDes>
+            <StyledProjectName>프로젝트 펀딩 이름</StyledProjectName>
+            <StyledRange>
+              <StyledDate>모금 종료일 </StyledDate>
+              <StyledAmount> 목표 모금액</StyledAmount>
+            </StyledRange>
+          </StyledFundDes>
+          <StyledTag>
+            <Tag>tag1</Tag>
+            <Tag>tag2</Tag>
+          </StyledTag>
+        </StyledDesWrap>
+      </StyledCard>
+    </Link>
   );
 }
 
@@ -65,8 +68,19 @@ const StyledDesWrap = styled.div`
   border-radius: 0px 0px 16px 16px;
 `;
 const StyledRange = styled.div`
+  font-family: "Noto Sans KR";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 16px;
+  /* identical to box height, or 133% */
+
   display: flex;
-  color: black;
+  align-items: center;
+
+  /* neutral/gray */
+
+  color: #83859c;
   margin-top: 8px;
   margin-left: 16px;
 `;
@@ -99,6 +113,12 @@ const Tag = styled.div`
   background-origin: border-box;
   background-clip: content-box, border-box;
   border-radius: 16px 16px 16px 16px;
+
+  font-family: "Noto Sans KR";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 16px;
 `;
 
 const StyledProjectName = styled.div`

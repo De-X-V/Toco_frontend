@@ -1,12 +1,11 @@
 import Link from "next/link";
-import { useRouter } from "next/router";
+
 import styled from "styled-components";
 import Image from "next/image";
 
 import Logo from "../../public/logo3.png";
 import Profile from "../../public/profile.png";
 function AppBar() {
-  const router = useRouter();
   return (
     <Wrap>
       <StyledLogo>
@@ -22,8 +21,8 @@ function AppBar() {
         <Link href="/PennyFund">
           <StyledLink>잔돈펀딩</StyledLink>
         </Link>
-        <Link href="/About">
-          <StyledLink>About</StyledLink>
+        <Link href="/Nft">
+          <StyledLink>NFT</StyledLink>
         </Link>
         <Link href="/MyPage">
           <StyledLink>mypage</StyledLink>
