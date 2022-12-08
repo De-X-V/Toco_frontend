@@ -10,14 +10,16 @@ export default function FundCard() {
       <Image src={Logo} width="350px" height="160px" />
       <StyledDday>D-100</StyledDday>
       <StyledDesWrap>
-        <StyledProjectName>프로젝트 펀딩 이름</StyledProjectName>
-        <StyledRange>
-          <div>모금 종료일 </div>
-          <div> 목표 모금액</div>
-        </StyledRange>
+        <StyledFundDes>
+          <StyledProjectName>프로젝트 펀딩 이름</StyledProjectName>
+          <StyledRange>
+            <StyledDate>모금 종료일 </StyledDate>
+            <StyledAmount> 목표 모금액</StyledAmount>
+          </StyledRange>
+        </StyledFundDes>
         <StyledTag>
-          <div>tag1</div>
-          <div>tag2</div>
+          <Tag>tag1</Tag>
+          <Tag>tag2</Tag>
         </StyledTag>
       </StyledDesWrap>
     </StyledCard>
@@ -65,19 +67,41 @@ const StyledDesWrap = styled.div`
 const StyledRange = styled.div`
   display: flex;
   color: black;
+  margin-top: 8px;
+  margin-left: 16px;
+`;
+
+const StyledDate = styled.div``;
+const StyledAmount = styled.div``;
+const StyledFundDes = styled.div`
+  position: absolute;
+  top: 180px;
 `;
 
 const StyledTag = styled.div`
+  position: absolute;
+  top: 240px;
+  margin-left: 16px;
   display: flex;
   color: black;
 `;
+const Tag = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 4px;
+  width: 54px;
+  height: 24px;
+  border: 3px solid transparent;
+
+  background-image: linear-gradient(white, white),
+    linear-gradient(100.6deg, #d16ba5 0%, #86a8e7 50.89%, #5ffbf1 97.7%);
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+  border-radius: 16px 16px 16px 16px;
+`;
 
 const StyledProjectName = styled.div`
-  height: 24px;
-  left: 0px;
-  right: 32px;
-  top: 0px;
-
   /* H6 - bold 18 (24, 0.1px) */
 
   font-family: "Nunito";
@@ -93,6 +117,5 @@ const StyledProjectName = styled.div`
 
   color: white;
 
-  margin-top: 16px;
   margin-left: 16px;
 `;
