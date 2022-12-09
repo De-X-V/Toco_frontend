@@ -39,3 +39,23 @@ li {
     background: black;
   }
 }
+
+@font-face {
+  font-family: "NotoSansKR";
+  src: local("NotoSansKR"),
+    url("/assets/fonts/NotoSansKR-Black.woff2") format("woff2"),
+    url("/assets/fonts/NotoSansKR-Black.woff") format("woff"),
+    url("/assets/fonts/NotoSansKR-Black.otf") format("opentype");
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "NotoSansKR";
+  src: local("NotoSansKR"),
+    url("/assets/fonts/NotoSansKR-Bold.woff2") format("woff2"),
+    url("/assets/fonts/NotoSansKR-Bold.woff") format("woff"),
+    url("/assets/fonts/NotoSansKR-Bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+}

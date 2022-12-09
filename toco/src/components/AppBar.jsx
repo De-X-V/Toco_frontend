@@ -5,12 +5,22 @@ import Image from "next/image";
 
 import Logo from "../../public/logo3.png";
 import Profile from "../../public/profile.png";
+
+import { useAccount, useConnect, useDisconnect } from "wagmi";
+import { InjectedConnector } from "wagmi/connectors/injected";
 function AppBar() {
+  const { address, isConnected } = useAccount();
+  const { connect } = useConnect({
+    connector: new InjectedConnector(),
+  });
+  const { disconnect } = useDisconnect();
   return (
     <Wrap>
-      <StyledLogo>
-        <Image src={Logo} />
-      </StyledLogo>
+      <Link href="/">
+        <StyledLogo>
+          <Image src={Logo} />
+        </StyledLogo>
+      </Link>
       <StyledLinkBox>
         <Link href="/">
           <StyledLink>TOcO</StyledLink>
@@ -28,9 +38,24 @@ function AppBar() {
           <StyledLink>mypage</StyledLink>
         </Link>
       </StyledLinkBox>
-      <StyledProfile>
-        <Image src={Profile} width="40px" height="40px" />
-      </StyledProfile>
+      {isConnected ? (
+        <>
+          <StyledProfile2>
+            <Image src={Profile} width="40px" height="40px" />
+          </StyledProfile2>
+          <div>
+            Connected to {address}
+            <button onClick={() => disconnect()}>Disconnect</button>
+          </div>
+        </>
+      ) : (
+        <>
+          <StyledProfile>
+            <Image src={Profile} width="40px" height="40px" />
+          </StyledProfile>
+          <button onClick={() => connect()}>Connect Wallet</button>
+        </>
+      )}
     </Wrap>
   );
 }
@@ -53,7 +78,11 @@ const StyledProfile = styled.div`
   border-radius: 20px;
   margin-right: 40px;
 `;
-
+const StyledProfile2 = styled.div`
+  background-color: green;
+  border-radius: 20px;
+  margin-right: 40px;
+`;
 const StyledLinkBox = styled.div`
   width: 487px;
   height: 24px;
@@ -65,10 +94,11 @@ const StyledLinkBox = styled.div`
 const StyledLink = styled.a`
   /* Body/Medium */
 
-  font-family: "Plus Jakarta Sans";
+  font-family: "Noto Sans KR";
   font-style: normal;
-  font-weight: 400;
+  font-weight: 700;
   font-size: 16px;
-  line-height: 150%;
+  line-height: 23px;
+
   margin-right: 32px;
 `;

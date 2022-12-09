@@ -11,16 +11,22 @@ export default function MyChangeFund() {
       <Title>나의 잔돈 펀딩 목록</Title>
       <CardWrapper>
         <FundCard />
+        <FundCard />
+        <FundCard />
       </CardWrapper>
     </Wrap>
   );
 }
 
 const Wrap = styled.div`
-  margin-left: 30px;
+  display: flex;
+  flex-direction: column;
+  margin-left: 116px;
 `;
 
 const Title = styled.div`
+  margin-top: 64px;
+  margin-bottom: 51px;
   font-family: "Nunito";
   font-style: normal;
   font-weight: 600;
@@ -32,20 +38,14 @@ const Title = styled.div`
 
   /* neutral/black */
 
-  color: #2b2b43;
+  color: white;
 `;
 
 const CardWrapper = styled.div`
   width: 410px;
-  height: 642px;
-
-  background: #f7f7f7;
-  /* Primary Color */
-
-  border: 1px solid #f2e7d5;
-  border-radius: 16px;
 
   display: flex;
+  flex-direction: column;
   justify-content: center;
   margin-left: 30px;
 `;

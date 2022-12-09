@@ -37,6 +37,7 @@ const StyledCard = styled.div`
   border-radius: 16px;
   flex-shrink: 0;
   position: relative;
+  margin-bottom: 30px;
 `;
 
 const StyledDday = styled.p`
