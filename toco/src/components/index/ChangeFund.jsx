@@ -10,28 +10,34 @@ export default function ChangeFund() {
   return (
     <Wrap>
       <Title>잔돈 펀딩</Title>
-      <StyledDiv>
-        <Container ref={scrollRef}>
-          <FundCard />
-          <FundCard />
-          <FundCard />
-          <FundCard />
-          <FundCard />
-          <FundCard />
-          <FundCard />
-          <FundCard />
-        </Container>
-      </StyledDiv>
+      <ContainerWrap>
+        <StyledDiv>
+          <Container ref={scrollRef}>
+            <FundCard />
+            <FundCard />
+            <FundCard />
+            <FundCard />
+            <FundCard />
+            <FundCard />
+            <FundCard />
+            <FundCard />
+          </Container>
+        </StyledDiv>
+      </ContainerWrap>
     </Wrap>
   );
 }
-
 const Wrap = styled.div`
   margin-top: 120px;
 
   width: 1345px;
 `;
-
+const ContainerWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
 const Title = styled.div`
   font-family: "Noto Sans KR";
   font-style: normal;

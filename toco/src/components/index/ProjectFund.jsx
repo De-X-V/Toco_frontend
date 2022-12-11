@@ -10,18 +10,20 @@ export default function ProjectFund() {
   return (
     <Wrap>
       <Title>프로젝트 펀딩</Title>
-      <StyledDiv>
-        <Container ref={scrollRef}>
-          <FundCard />
-          <FundCard />
-          <FundCard />
-          <FundCard />
-          <FundCard />
-          <FundCard />
-          <FundCard />
-          <FundCard />
-        </Container>
-      </StyledDiv>
+      <ContainerWrap>
+        <StyledDiv>
+          <Container ref={scrollRef}>
+            <FundCard />
+            <FundCard />
+            <FundCard />
+            <FundCard />
+            <FundCard />
+            <FundCard />
+            <FundCard />
+            <FundCard />
+          </Container>
+        </StyledDiv>
+      </ContainerWrap>
     </Wrap>
   );
 }
@@ -30,6 +32,12 @@ const Wrap = styled.div`
   margin-top: 120px;
 
   width: 1345px;
+`;
+const ContainerWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 
 const Title = styled.div`
@@ -46,7 +54,6 @@ const Title = styled.div`
   );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  align-items: flex-start;
 `;
 
 const StyledDiv = styled.div`
@@ -56,13 +63,12 @@ const StyledDiv = styled.div`
   width: 1090px;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
 `;
 
 const Container = styled.div`
   //가로스크롤
   display: flex;
-  gap: 30px;
+  gap: 16px;
   height: 350px;
   overflow: hidden;
   .react-horizontal-scrolling-menu--scroll-container::-webkit-scrollbar {
