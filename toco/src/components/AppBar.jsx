@@ -8,12 +8,21 @@ import Profile from "../../public/profile.png";
 
 import { useAccount, useConnect, useDisconnect } from "wagmi";
 import { InjectedConnector } from "wagmi/connectors/injected";
+import { useEffect } from "react";
+import { useState } from "react";
 function AppBar() {
   const { address, isConnected } = useAccount();
   const { connect } = useConnect({
     connector: new InjectedConnector(),
   });
   const { disconnect } = useDisconnect();
+
+  const [walletConnect, setWalletConnect] = useState(false);
+
+  useEffect(() => {
+    setWalletConnect(isConnected);
+  }, [walletConnect, isConnected]);
+
   return (
     <Wrap>
       <Link href="/">
@@ -38,7 +47,14 @@ function AppBar() {
           <StyledLink>mypage</StyledLink>
         </Link>
       </StyledLinkBox>
-      {isConnected ? (
+      {!walletConnect ? (
+        <>
+          <StyledProfile>
+            <Image src={Profile} width="40px" height="40px" />
+          </StyledProfile>
+          <button onClick={() => connect()}>Connect Wallet</button>
+        </>
+      ) : (
         <>
           <StyledProfile2>
             <Image src={Profile} width="40px" height="40px" />
@@ -47,13 +63,6 @@ function AppBar() {
             Connected to {address}
             <button onClick={() => disconnect()}>Disconnect</button>
           </div>
-        </>
-      ) : (
-        <>
-          <StyledProfile>
-            <Image src={Profile} width="40px" height="40px" />
-          </StyledProfile>
-          <button onClick={() => connect()}>Connect Wallet</button>
         </>
       )}
     </Wrap>
