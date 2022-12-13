@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Image from "next/image";
-import Icon from "../../../public/fundDetail/Icon.png";
+import Icon from "../../../public/FundDetail/Icon.png";
 import { useAccount, useBalance } from "wagmi";
 function DonateCard() {
   const [percent, setPercent] = useState(75);
