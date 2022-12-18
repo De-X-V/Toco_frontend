@@ -3,15 +3,29 @@ import styled from "styled-components";
 import useScrollFadeIn from "../../../src/hooks/useScrollFadeIn";
 import { useHorizontalScroll } from "../../hooks/useHorizontalScroll";
 import FundCard from "../fund/FundCard";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
+import { ScrollMenu, VisibilityContext } from "react-horizontal-scrolling-menu";
 
 export default function ProjectFund() {
   const scrollRef = useHorizontalScroll();
+
+  //1111
+
+  const handleClick = () => {
+    const container = scrollRef.current;
+    container.scrollBy({ left: 350, behavior: "smooth" });
+  };
+  const handleClick2 = () => {
+    const container = scrollRef.current;
+    container.scrollBy({ left: -350, behavior: "smooth" });
+  };
+
   return (
     <Wrap>
       <Title>프로젝트 펀딩</Title>
       <ContainerWrap>
         <StyledDiv>
+          <LeftButton onClick={handleClick2}>&lt;</LeftButton>
           <Container ref={scrollRef}>
             <FundCard />
             <FundCard />
@@ -22,6 +36,7 @@ export default function ProjectFund() {
             <FundCard />
             <FundCard />
           </Container>
+          <RightButton onClick={handleClick}>&gt;</RightButton>
         </StyledDiv>
       </ContainerWrap>
     </Wrap>
@@ -57,6 +72,7 @@ const Title = styled.div`
 `;
 
 const StyledDiv = styled.div`
+  position: relative;
   margin-top: 40px;
   display: flex;
   height: 460px;
@@ -71,11 +87,37 @@ const Container = styled.div`
   gap: 16px;
   height: 350px;
   overflow: hidden;
-  .react-horizontal-scrolling-menu--scroll-container::-webkit-scrollbar {
-    display: none;
+  touch-action: pan-x;
+`;
+
+const LeftButton = styled.button`
+  position: absolute;
+  top: 200px;
+  left: 10px;
+  padding: 10px 10px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  :hover {
+    background-color: #444;
   }
-  .react-horizontal-scrolling-menu--scroll-container {
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
+  transition: background-color 0.2s ease-in-out;
+  z-index: 5;
+`;
+
+const RightButton = styled.button`
+  position: absolute;
+  top: 200px;
+  right: 10px;
+  padding: 10px 10px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  :hover {
+    background-color: #444;
   }
+  transition: background-color 0.2s ease-in-out;
+  z-index: 5;
 `;
