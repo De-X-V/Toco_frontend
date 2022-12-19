@@ -2,12 +2,13 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Image from "next/image";
 import Icon from "../../../public/FundDetail/Icon.png";
+import MyIcon from "../../../public/FundDetail/myicon.png";
 import { useAccount, useBalance } from "wagmi";
 function DonateCard() {
   const [percent, setPercent] = useState(75);
   const [fundPrice, setFundPrice] = useState("");
   useEffect(() => {
-    setPercent(75);
+    setPercent(50);
   }, [percent]);
   const { address, isConnected } = useAccount();
   const { data, isError, isLoading } = useBalance({
@@ -39,37 +40,59 @@ function DonateCard() {
         <DonateRange>
           <TargetWrap>
             <Image src={Icon} layout="fixed" alt="banner" />
-            <div>
+            <TagetDivBox>
               <div>누적 모금액</div>
-              <div>500,000원</div>
-            </div>
+              <Target2>500,000원</Target2>
+            </TagetDivBox>
           </TargetWrap>
           <TargetWrap>
             <Image src={Icon} layout="fixed" alt="banner" />
-            <div>
+            <TagetDivBox>
               <div>모금 진행률</div>
-              <div>25%</div>
-            </div>
+              <Target2>67%</Target2>
+            </TagetDivBox>
           </TargetWrap>
         </DonateRange>
+        {isConnected ? (
+          <DonateRange>
+            <TargetWrap>
+              <Image src={MyIcon} layout="fixed" alt="banner" />
+              <TagetDivBox>
+                <div>나의 기부액</div>
+                <Target2>5 KLAY</Target2>
+              </TagetDivBox>
+            </TargetWrap>
+            <TargetWrap>
+              <Image src={MyIcon} layout="fixed" alt="banner" />
+              <TagetDivBox>
+                <div>나의 기여도</div>
+                <Target2>0.07%</Target2>
+              </TagetDivBox>
+            </TargetWrap>
+          </DonateRange>
+        ) : (
+          <></>
+        )}
         <ProgressWrap>
           <ProgressBar>
-            <Progress percent={percent} />
+            <Progress percent={percent}></Progress>
           </ProgressBar>
         </ProgressWrap>
 
         {isConnected ? (
           <ConnectedWrap>
-            <AddressCover>지갑주소{address}</AddressCover>
+            <ContractBox>
+              <AddressCover>지갑주소{address}</AddressCover>
 
-            <div>
-              Balance: {data?.formatted} {data?.symbol} 원
-            </div>
-            <input
+              <div>
+                Balance: {data?.formatted} {data?.symbol} 원
+              </div>
+            </ContractBox>
+            <StyledInput
               onChange={onPriceChange}
               value={fundPrice}
               placeholder="금액 입력하기"
-            ></input>
+            ></StyledInput>
             <ButtonWrap>
               <StyledButton value={5} onClick={onPriceButton}>
                 +5KLAY
@@ -89,8 +112,8 @@ function DonateCard() {
           <></>
         )}
         <DonateTime>
-          <div>종료까지 남은 시간</div>
-          <div>00일 00시 00분 00초</div>
+          <TimeTitle>종료까지 남은 시간</TimeTitle>
+          <TimeLeft>00일 00시 00분 00초</TimeLeft>
         </DonateTime>
         <DonateButton>기부하기</DonateButton>
       </CardWrap>
@@ -142,19 +165,34 @@ const DonateTarget = styled.div`
   font-weight: 500;
   font-size: 20px;
   line-height: 31px;
-  margin-bottom: 48px;
+  margin-bottom: 44px;
 
   /* Text Color */
 
   color: #ffffff;
 `;
+
+const TagetDivBox = styled.div`
+  margin-left: 10px;
+`;
+const Target2 = styled.div`
+  margin-top: 4px;
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 23px;
+`;
+
 const ProgressWrap = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 100;
+  margin-bottom: 40px;
 `;
 const ProgressBar = styled.div`
-  width: 100%;
+  width: 395px;
   height: 15px;
   background-color: black;
   border-radius: 10px;
@@ -187,6 +225,22 @@ const TargetWrap = styled.div`
 const DonateTime = styled.div`
   display: flex;
 `;
+const TimeTitle = styled.div`
+  margin-top: 24px;
+  margin-right: 64px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 23px;
+`;
+const TimeLeft = styled.div`
+  margin-top: 24px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 900;
+  font-size: 16px;
+  line-height: 19px;
+  letter-spacing: 0.005em;
+`;
 const ConnectedWrap = styled.div`
   display: flex;
   flex-direction: column;
@@ -199,6 +253,30 @@ const ConnectedWrap = styled.div`
 `;
 const AddressCover = styled.div``;
 
+const ContractBox = styled.div`
+  width: 403px;
+  height: 54px;
+  margin-top: 24px;
+`;
+
+const StyledInput = styled.input`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 16px;
+  padding: 12px 16px;
+  gap: 8px;
+
+  width: 363px;
+  height: 48px;
+
+  color: #8f9098;
+  background-color: #303135;
+  border: 1px solid #8f9098;
+  border-radius: 12px;
+  outline: none;
+`;
+
 const ButtonWrap = styled.div`
   display: flex;
 `;
@@ -210,6 +288,9 @@ const StyledButton = styled.button`
   color: white;
   padding: 1px 1px;
 
+  margin-top: 16px;
+  margin-left: 7px;
+  margin-right: 7px;
   width: 80px;
   height: 45px;
 
@@ -227,8 +308,8 @@ const StyledButton = styled.button`
 `;
 const DonateButton = styled.button`
   text-align: center;
-  margin-top: 116px;
-  margin-bottom: 67px;
+  margin-top: 30px;
+  margin-bottom: 30px;
   /* Secondary Color */
   width: 395px;
   height: 64px;

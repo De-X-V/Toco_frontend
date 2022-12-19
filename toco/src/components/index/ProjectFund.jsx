@@ -5,7 +5,9 @@ import { useHorizontalScroll } from "../../hooks/useHorizontalScroll";
 import FundCard from "../fund/FundCard";
 import { useRef, useEffect, useState } from "react";
 import { ScrollMenu, VisibilityContext } from "react-horizontal-scrolling-menu";
-
+import Kimchi from "../../../public/ProjectImg/kimchi.png";
+import Room from "../../../public/ProjectImg/room.png";
+import Food from "../../../public/ProjectImg/food.png";
 export default function ProjectFund() {
   const scrollRef = useHorizontalScroll();
 
@@ -27,9 +29,9 @@ export default function ProjectFund() {
         <StyledDiv>
           <LeftButton onClick={handleClick2}>&lt;</LeftButton>
           <Container ref={scrollRef}>
-            <FundCard />
-            <FundCard />
-            <FundCard />
+            <FundCard imgSrc={Kimchi} />
+            <FundCard imgSrc={Room} />
+            <FundCard imgSrc={Food} />
             <FundCard />
             <FundCard />
             <FundCard />

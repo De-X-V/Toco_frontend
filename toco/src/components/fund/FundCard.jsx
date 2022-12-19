@@ -5,11 +5,23 @@ import Link from "next/link";
 
 import Logo from "../../../public/logo.png";
 
-export default function FundCard() {
+export default function FundCard({ imgSrc }) {
+  const post = {
+    id: "abc",
+  };
   return (
-    <Link href="/FundDetail">
+    <Link
+      href={{
+        pathname: `/FundDetail/[id]`,
+        query: {
+          data: JSON.stringify(post),
+          // post: 넘어간 페이지에서 쓸 데이터들
+        },
+      }}
+      as={`/FundDetail/${post.id}`}
+    >
       <StyledCard>
-        <Image src={Logo} width="350px" height="160px" />
+        <Image src={imgSrc} width="350px" height="160px" />
         <StyledDday>D-100</StyledDday>
         <StyledDesWrap>
           <StyledFundDes>

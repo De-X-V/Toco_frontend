@@ -4,19 +4,48 @@ import Image from "next/image";
 
 import Logo from "../../../public/logo.png";
 import Profile from "../../../public/profile.png";
+import { useAccount, useConnect, useDisconnect } from "wagmi";
+import { InjectedConnector } from "wagmi/connectors/injected";
+import { useEffect } from "react";
+import { useState } from "react";
 
 export default function Account() {
+  const { address, isConnected } = useAccount();
+  const { connect } = useConnect({
+    connector: new InjectedConnector(),
+  });
+  const { disconnect } = useDisconnect();
+
+  const [walletConnect, setWalletConnect] = useState(false);
+
+  useEffect(() => {
+    setWalletConnect(isConnected);
+  }, [walletConnect, isConnected]);
   return (
     <Wrap>
       <Title>My Page</Title>
       <AccountWrap>
-        <StyledProfile>
-          <Image src={Profile} width="70x" height="70px" />
-        </StyledProfile>
-        <StyledAccount>
-          <div>Account 1</div>
-          <StyledAccountCode>0x121213124141</StyledAccountCode>
-        </StyledAccount>
+        {!walletConnect ? (
+          <>
+            <StyledProfile>
+              <Image src={Profile} width="70x" height="70px" />
+            </StyledProfile>
+            <StyledAccount>
+              <div>Account 1</div>
+              <StyledAccountCode>0x121213124141</StyledAccountCode>
+            </StyledAccount>
+          </>
+        ) : (
+          <>
+            <StyledProfile2>
+              <Image src={Profile} width="70x" height="70px" />
+            </StyledProfile2>
+            <StyledAccount>
+              <div> user1</div>
+              <StyledAccountCode>{address}</StyledAccountCode>
+            </StyledAccount>
+          </>
+        )}
       </AccountWrap>
     </Wrap>
   );
@@ -53,6 +82,16 @@ const StyledProfile = styled.div`
   width: 80px;
   height: 80px;
   background-color: #ffd05a;
+  border-radius: 40px;
+  margin-right: 40px;
+`;
+const StyledProfile2 = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  background-color: green;
   border-radius: 40px;
   margin-right: 40px;
 `;
