@@ -9,6 +9,9 @@ import { InjectedConnector } from "wagmi/connectors/injected";
 import { useEffect } from "react";
 import { useState } from "react";
 
+import { useRecoilState } from "recoil";
+import { userAtom } from "../../recoil/recoilUserState";
+
 export default function Account() {
   const { address, isConnected } = useAccount();
   const { connect } = useConnect({
@@ -17,6 +20,8 @@ export default function Account() {
   const { disconnect } = useDisconnect();
 
   const [walletConnect, setWalletConnect] = useState(false);
+
+  const [userAddress, setUserAddress] = useRecoilState(userAtom);
 
   useEffect(() => {
     setWalletConnect(isConnected);
@@ -31,8 +36,8 @@ export default function Account() {
               <Image src={Profile} width="70x" height="70px" />
             </StyledProfile>
             <StyledAccount>
-              <div>Account 1</div>
-              <StyledAccountCode>0x121213124141</StyledAccountCode>
+              <div>연결 x</div>
+              <StyledAccountCode>연결 x</StyledAccountCode>
             </StyledAccount>
           </>
         ) : (
@@ -42,7 +47,7 @@ export default function Account() {
             </StyledProfile2>
             <StyledAccount>
               <div> user1</div>
-              <StyledAccountCode>{address}</StyledAccountCode>
+              <StyledAccountCode>{userAddress}</StyledAccountCode>
             </StyledAccount>
           </>
         )}

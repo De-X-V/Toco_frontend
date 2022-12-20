@@ -3,6 +3,7 @@ import "../styles/globals.css";
 
 import { WagmiConfig, createClient } from "wagmi";
 import { getDefaultProvider } from "ethers";
+import { RecoilRoot } from "recoil";
 const client = createClient({
   autoConnect: true,
   provider: getDefaultProvider(),
@@ -10,11 +11,13 @@ const client = createClient({
 
 function MyApp({ Component, pageProps }) {
   return (
-    <WagmiConfig client={client}>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
-    </WagmiConfig>
+    <RecoilRoot>
+      <WagmiConfig client={client}>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </WagmiConfig>
+    </RecoilRoot>
   );
 }
 

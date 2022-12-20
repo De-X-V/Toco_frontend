@@ -10,8 +10,13 @@ import { useAccount, useConnect, useDisconnect } from "wagmi";
 import { InjectedConnector } from "wagmi/connectors/injected";
 import { useEffect } from "react";
 import { useState } from "react";
+
+import { useRecoilState } from "recoil";
+import { userAtom } from "../recoil/recoilUserState";
+
 function AppBar() {
   const { address, isConnected } = useAccount();
+  const [userAddress, setUserAddress] = useRecoilState(userAtom);
   const { connect } = useConnect({
     connector: new InjectedConnector(),
   });
@@ -21,6 +26,7 @@ function AppBar() {
 
   useEffect(() => {
     setWalletConnect(isConnected);
+    setUserAddress(address);
   }, [walletConnect, isConnected]);
 
   return (
@@ -60,7 +66,7 @@ function AppBar() {
             <Image src={Profile} width="40px" height="40px" />
           </StyledProfile2>
           <div>
-            Connected to {address}
+            Connected to {userAddress}
             <button onClick={() => disconnect()}>Disconnect</button>
           </div>
         </>
