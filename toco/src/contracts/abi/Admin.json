@@ -1,0 +1,210 @@
+[
+  {
+    "inputs": [
+      {
+        "components": [
+          { "internalType": "string", "name": "fundingName", "type": "string" },
+          {
+            "internalType": "uint256",
+            "name": "targetAmount",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "currentAmount",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "fundingStartDate",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "fundingEndDate",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct ProjectFunding.funding",
+        "name": "_newFunding",
+        "type": "tuple"
+      }
+    ],
+    "name": "registerPFunding",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "_pFAddr", "type": "address" }
+    ],
+    "name": "getPFunding",
+    "outputs": [
+      {
+        "components": [
+          { "internalType": "string", "name": "fundingName", "type": "string" },
+          {
+            "internalType": "uint256",
+            "name": "targetAmount",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "currentAmount",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "fundingStartDate",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "fundingEndDate",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct ProjectFunding.funding",
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "components": [
+          { "internalType": "string", "name": "fundingName", "type": "string" },
+          {
+            "internalType": "uint256",
+            "name": "targetAmount",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "currentAmount",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "fundingStartDate",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "fundingEndDate",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct ChangesFunding.funding",
+        "name": "_newFunding",
+        "type": "tuple"
+      }
+    ],
+    "name": "registerCFunding",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "_cFAddr", "type": "address" }
+    ],
+    "name": "getCFunding",
+    "outputs": [
+      {
+        "components": [
+          { "internalType": "string", "name": "fundingName", "type": "string" },
+          {
+            "internalType": "uint256",
+            "name": "targetAmount",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "currentAmount",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "fundingStartDate",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "fundingEndDate",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct ChangesFunding.funding",
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "_addr", "type": "address" }
+    ],
+    "name": "setDonator",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "_addr", "type": "address" }
+    ],
+    "name": "getDonator",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "address",
+            "name": "donatorAddr",
+            "type": "address"
+          },
+          {
+            "internalType": "address[]",
+            "name": "myDonatedPFList",
+            "type": "address[]"
+          },
+          {
+            "internalType": "address[]",
+            "name": "myDonatedCFList",
+            "type": "address[]"
+          }
+        ],
+        "internalType": "struct Administrator.Donator",
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "_addr", "type": "address" }
+    ],
+    "name": "addDonatedPFList",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "_addr", "type": "address" }
+    ],
+    "name": "addDonatedCFList",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }
+]
