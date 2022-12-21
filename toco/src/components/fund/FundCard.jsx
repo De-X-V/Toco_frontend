@@ -5,7 +5,7 @@ import Link from "next/link";
 
 import Logo from "../../../public/logo.png";
 
-export default function FundCard({ imgSrc }) {
+export default function FundCard({ imgSrc, title, id, date, amount }) {
   const post = {
     id: "abc",
   };
@@ -20,15 +20,15 @@ export default function FundCard({ imgSrc }) {
       }}
       as={`/FundDetail/${post.id}`}
     >
-      <StyledCard>
+      <StyledCard id={id}>
         <Image src={imgSrc} width="350px" height="160px" />
         <StyledDday>D-100</StyledDday>
         <StyledDesWrap>
           <StyledFundDes>
-            <StyledProjectName>프로젝트 펀딩 이름</StyledProjectName>
+            <StyledProjectName>{title}</StyledProjectName>
             <StyledRange>
-              <StyledDate>모금 종료일 </StyledDate>
-              <StyledAmount> 목표 모금액</StyledAmount>
+              <StyledDate>{date} </StyledDate>
+              <StyledAmount> 목표 모금액 {amount} KLAY</StyledAmount>
             </StyledRange>
           </StyledFundDes>
           <StyledTag>

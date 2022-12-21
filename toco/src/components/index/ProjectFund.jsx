@@ -22,6 +22,27 @@ export default function ProjectFund() {
     container.scrollBy({ left: -350, behavior: "smooth" });
   };
 
+  const dummyUsers = [
+    {
+      p_funding_title: "김치 기부하기",
+      p_funding_id: 1,
+      p_funding_end_date: Date("2022-12-25"),
+      p_funding_target_amont: 10,
+    },
+    {
+      p_funding_title: "다른거 기부하기",
+      p_funding_id: 1,
+      p_funding_end_date: Date("2022-12-25"),
+      p_funding_target_amont: 10,
+    },
+    {
+      p_funding_title: "다른거2 기부하기",
+      p_funding_id: 1,
+      p_funding_end_date: Date("2022-12-25"),
+      p_funding_target_amont: 10,
+    },
+  ];
+
   return (
     <Wrap>
       <Title>프로젝트 펀딩</Title>
@@ -29,6 +50,14 @@ export default function ProjectFund() {
         <StyledDiv>
           <LeftButton onClick={handleClick2}>&lt;</LeftButton>
           <Container ref={scrollRef}>
+            {dummyUsers.map((card) => (
+              <FundCard
+                title={card.p_funding_title}
+                id={card.p_funding_id}
+                date={card.p_funding_end_date}
+                amount={card.p_funding_target_amont}
+              />
+            ))}
             <FundCard imgSrc={Kimchi} />
             <FundCard imgSrc={Room} />
             <FundCard imgSrc={Food} />
