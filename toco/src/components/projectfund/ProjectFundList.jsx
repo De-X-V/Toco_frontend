@@ -1,8 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import FundCard from "../fund/FundCard";
-import { firestore } from "../../api/firebase";
+
 import { useEffect, useState } from "react";
+import { firestore } from "../../api/firebase";
 import { collection, getDocs } from "firebase/firestore";
 import CardAPI from "../../api/cardApi";
 import Image from "next/image";

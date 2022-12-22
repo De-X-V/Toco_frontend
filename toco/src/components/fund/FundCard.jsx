@@ -5,7 +5,17 @@ import Link from "next/link";
 
 import Logo from "../../../public/logo.png";
 
-export default function FundCard({ imgSrc, title, id, date, amount }) {
+export default function FundCard({
+  imgSrc,
+  title,
+  id,
+  date,
+  amount,
+  status,
+  tags1,
+  tags2,
+  tags3,
+}) {
   const post = {
     id: "abc",
   };
@@ -22,18 +32,19 @@ export default function FundCard({ imgSrc, title, id, date, amount }) {
     >
       <StyledCard id={id}>
         <Image src={imgSrc} width="350px" height="160px" />
-        <StyledDday>D-100</StyledDday>
+        <StyledStatus>{status}</StyledStatus>
         <StyledDesWrap>
           <StyledFundDes>
             <StyledProjectName>{title}</StyledProjectName>
             <StyledRange>
-              <StyledDate>{date} </StyledDate>
+              <StyledDate>D-{date} </StyledDate>
               <StyledAmount> 목표 모금액 {amount} KLAY</StyledAmount>
             </StyledRange>
           </StyledFundDes>
           <StyledTag>
-            <Tag>tag1</Tag>
-            <Tag>tag2</Tag>
+            <Tag>{tags1}</Tag>
+            <Tag>{tags2}</Tag>
+            <Tag>{tags3}</Tag>
           </StyledTag>
         </StyledDesWrap>
       </StyledCard>
@@ -52,9 +63,10 @@ const StyledCard = styled.div`
   margin-bottom: 30px;
 `;
 
-const StyledDday = styled.p`
+const StyledStatus = styled.p`
   width: 75px;
   height: 32px;
+  font-size: 11px;
   position: absolute;
   display: flex;
   align-items: center;

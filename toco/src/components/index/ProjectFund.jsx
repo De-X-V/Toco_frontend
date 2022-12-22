@@ -8,6 +8,9 @@ import { ScrollMenu, VisibilityContext } from "react-horizontal-scrolling-menu";
 import Kimchi from "../../../public/ProjectImg/kimchi.png";
 import Room from "../../../public/ProjectImg/room.png";
 import Food from "../../../public/ProjectImg/food.png";
+
+import { firestore } from "../../api/firebase";
+import { collection, getDocs } from "firebase/firestore";
 export default function ProjectFund() {
   const scrollRef = useHorizontalScroll();
 
@@ -26,22 +29,72 @@ export default function ProjectFund() {
     {
       p_funding_title: "김치 기부하기",
       p_funding_id: 1,
-      p_funding_end_date: Date("2022-12-25"),
+      p_funding_end_date: "2022-12-25",
       p_funding_target_amont: 10,
+      p_funding_status: "모금 진행중",
+      p_funding_tags1: "반찬",
+      p_funding_tags2: "기부",
+      p_funding_tags3: "어르신",
     },
     {
       p_funding_title: "다른거 기부하기",
       p_funding_id: 1,
-      p_funding_end_date: Date("2022-12-25"),
+      p_funding_end_date: "2022-12-25",
       p_funding_target_amont: 10,
+      p_funding_status: "모금 종료",
+      p_funding_tags1: "반찬",
+      p_funding_tags2: "기부",
+      p_funding_tags3: "어르신",
     },
     {
       p_funding_title: "다른거2 기부하기",
       p_funding_id: 1,
-      p_funding_end_date: Date("2022-12-25"),
+      p_funding_end_date: "2022-12-25",
       p_funding_target_amont: 10,
+      p_funding_status: "모금 예정",
+      p_funding_tags1: "반찬",
+      p_funding_tags2: "기부",
+      p_funding_tags3: "어르신",
     },
   ];
+  /*
+  const getDday = (end) => {
+    const endDate = new Date(end);
+    //Thu Dec 22 2022 16:26:45 GMT+0900 (한국 표준시)
+    const today = new Date(); //Thu Dec 22 2022 16:27:51 GMT+0900 (한국 표준시)
+    const diff = end * 1000 - today.getTime();
+    const d = Math.round(diff / 86400000);
+    console.log(end, endDate, today);
+    return d;
+  };
+  */
+  const getDday = (end) => {
+    const today = Math.round(new Date().getTime() / 1000);
+
+    const d = Math.round((end.seconds - today) / 86400);
+    console.log(end.seconds, today, d);
+    return d;
+  };
+
+  // 이따가 users 추가하고 삭제하는거 진행을 도와줄 state
+  const [users, setUsers] = useState([]);
+
+  // db의 users 컬렉션을 가져옴
+  const usersCollectionRef = collection(firestore, "projectFunding");
+
+  // 시작될때 한번만 실행
+
+  useEffect(() => {
+    // 비동기로 데이터 받을준비
+    const getUsers = async () => {
+      // getDocs로 컬렉션안에 데이터 가져오기
+      const data = await getDocs(usersCollectionRef);
+      // users에 data안의 자료 추가. 객체에 id 덮어씌우는거
+      setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    };
+    getUsers();
+    console.log(users);
+  }, []);
 
   return (
     <Wrap>
@@ -50,12 +103,16 @@ export default function ProjectFund() {
         <StyledDiv>
           <LeftButton onClick={handleClick2}>&lt;</LeftButton>
           <Container ref={scrollRef}>
-            {dummyUsers.map((card) => (
+            {users.map((card) => (
               <FundCard
                 title={card.p_funding_title}
                 id={card.p_funding_id}
-                date={card.p_funding_end_date}
+                date={getDday(card.p_funding_end_date)}
                 amount={card.p_funding_target_amont}
+                status={card.p_funding_status}
+                tags1={card.p_funding_tags1}
+                tags2={card.p_funding_tags2}
+                tags3={card.p_funding_tags3}
               />
             ))}
             <FundCard imgSrc={Kimchi} />
