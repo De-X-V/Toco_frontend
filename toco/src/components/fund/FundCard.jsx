@@ -37,7 +37,7 @@ export default function FundCard({
           <StyledFundDes>
             <StyledProjectName>{title}</StyledProjectName>
             <StyledRange>
-              <StyledDate>D-{date} </StyledDate>
+              <StyledDate>D{date} </StyledDate>
               <StyledAmount> 목표 모금액 {amount} KLAY</StyledAmount>
             </StyledRange>
           </StyledFundDes>

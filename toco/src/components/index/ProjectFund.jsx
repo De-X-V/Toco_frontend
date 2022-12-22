@@ -69,10 +69,15 @@ export default function ProjectFund() {
   };
   */
   const getDday = (end) => {
-    const today = Math.round(new Date().getTime() / 1000);
+    const today = new Date().getTime() / 1000;
 
     const d = Math.round((end.seconds - today) / 86400);
     console.log(end.seconds, today, d);
+    if (d < 0) {
+      d = "+" + -d;
+    } else {
+      d = "-" + d;
+    }
     return d;
   };
 
@@ -105,6 +110,7 @@ export default function ProjectFund() {
           <Container ref={scrollRef}>
             {users.map((card) => (
               <FundCard
+                //imgSrc={card.p_funding_images}
                 title={card.p_funding_title}
                 id={card.p_funding_id}
                 date={getDday(card.p_funding_end_date)}
