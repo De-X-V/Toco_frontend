@@ -5,6 +5,8 @@ import FundCard from "../fund/FundCard";
 import { useEffect, useState } from "react";
 import { firestore } from "../../api/firebase";
 import { collection, getDocs } from "firebase/firestore";
+
+import { getDday } from "../../hooks/getDday";
 import CardAPI from "../../api/cardApi";
 import Image from "next/image";
 function ProjectFundList() {
@@ -33,9 +35,19 @@ function ProjectFundList() {
       <Title>전체 프로젝트 펀딩</Title>
       <CardList>
         {users.map((card) => (
-          <div key={card.id}>
-            <div>{card.p_funding_details}/</div>
-          </div>
+          <CardWrap>
+            <FundCard
+              imgSrc={card.p_funding_images}
+              title={card.p_funding_title}
+              id={card.p_funding_id}
+              date={getDday(card.p_funding_end_date)}
+              amount={card.p_funding_target_amont}
+              status={card.p_funding_status}
+              tags1={card.p_funding_tags1}
+              tags2={card.p_funding_tags2}
+              tags3={card.p_funding_tags3}
+            />
+          </CardWrap>
         ))}
         <CardWrap>
           <FundCard />
@@ -55,7 +67,9 @@ function ProjectFundList() {
 }
 
 const Wrap = styled.div`
-  margin-top: 87px;
+  margin: 87px;
+  display: flex;
+  flex-direction: column;
 `;
 const Title = styled.div`
   font-family: "Noto Sans KR";
@@ -68,6 +82,7 @@ const Title = styled.div`
 `;
 const CardList = styled.div`
   display: flex;
+  align-items: center;
   flex-wrap: wrap;
   padding: 24px 16px;
 `;

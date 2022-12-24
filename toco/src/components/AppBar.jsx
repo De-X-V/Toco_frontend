@@ -25,8 +25,10 @@ function AppBar() {
   const [walletConnect, setWalletConnect] = useState(false);
 
   useEffect(() => {
-    setWalletConnect(isConnected);
-    setUserAddress(address);
+    if (isConnected) {
+      setWalletConnect(isConnected);
+      setUserAddress(address);
+    }
   }, [walletConnect, isConnected]);
 
   return (
@@ -106,7 +108,7 @@ const StyledLinkBox = styled.div`
   align-items: center;
 `;
 
-const StyledLink = styled.a`
+const StyledLink = styled.div`
   /* Body/Medium */
 
   font-family: "Noto Sans KR";

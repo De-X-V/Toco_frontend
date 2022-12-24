@@ -42,8 +42,10 @@ export default function FundCard({
           <StyledFundDes>
             <StyledProjectName>{title}</StyledProjectName>
             <StyledRange>
-              <StyledDate>D{date} </StyledDate>
-              <StyledAmount> 목표 모금액 {amount} KLAY</StyledAmount>
+              <StyledDate>모금종료일 D{date} </StyledDate>
+              <StyledAmount>
+                &nbsp; ·&nbsp; 목표 모금액 {amount} KLAY
+              </StyledAmount>
             </StyledRange>
           </StyledFundDes>
           <StyledTag>
@@ -134,7 +136,7 @@ const Tag = styled.div`
   justify-content: center;
   align-items: center;
   margin: 4px;
-  width: 54px;
+  width: 65px;
   height: 24px;
   border: 3px solid transparent;
 

@@ -3,20 +3,57 @@ import styled from "styled-components";
 import Image from "next/image";
 import Icon from "../../../public/FundDetail/Icon.png";
 import MyIcon from "../../../public/FundDetail/myicon.png";
-import { useAccount, useBalance } from "wagmi";
+import { useAccount, useBalance, useConnect } from "wagmi";
+
+import { useRecoilState } from "recoil";
+import { userAtom } from "../../recoil/recoilUserState";
+
+import pFundingABI from "../../contracts/abi/pFunding.json";
+import { pFundingAddress } from "../../contracts/contract";
+
+import { getPfundingContract } from "../../hooks/getPfundingContract";
+
 function DonateCard() {
   const [percent, setPercent] = useState(75);
   const [fundPrice, setFundPrice] = useState("");
+
   useEffect(() => {
     setPercent(50);
   }, [percent]);
-  const { address, isConnected } = useAccount();
-  const { data, isError, isLoading } = useBalance({
-    address: `${address}`,
-  });
+
+  //web3
+  const Web3 = require("web3");
+
+  const web3 = new Web3(
+    "https://goerli.infura.io/v3/e7e63350a02446cd83ab4073d9c266d4"
+  );
+  const contract = getPfundingContract();
+
   useEffect(() => {
-    console.log(data);
-  }, [data]);
+    contract.methods
+      .getFunding()
+      .call()
+      .then((a) => {
+        console.log("연결 완료", a[0]);
+      });
+  }, []);
+
+  //wagmi
+  const { address, connector, isConnected } = useAccount();
+  const { connect, connectors } = useConnect();
+  const [_isConnected, _setIsConnected] = useState(false);
+  const [_connectors, _setConnectors] = useState([]);
+
+  const { data, isError, isLoading } = useBalance({
+    address: "0xA0Cf798816D4b9b9866b5330EEa46a18382f251e",
+    //address: `${address}`,
+    chainId: 1,
+  });
+
+  useEffect(() => {
+    _setIsConnected(isConnected);
+    _setConnectors(connectors);
+  }, [isConnected, connectors]);
 
   const onPriceChange = (e) => {
     setFundPrice(e.target.value);
@@ -29,6 +66,17 @@ function DonateCard() {
     } else {
       setFundPrice(parseFloat(fundPrice) + parseFloat(e.target.value));
     }
+  };
+  const onDonate = () => {
+    contract.methods
+      .donate(100000)
+      .send({
+        from: address,
+        gasPrice: "30000000000",
+        gas: "300000",
+        value: "100000",
+      })
+      .then(console.log);
   };
   return (
     <Wrap>
@@ -53,7 +101,7 @@ function DonateCard() {
             </TagetDivBox>
           </TargetWrap>
         </DonateRange>
-        {isConnected ? (
+        {_isConnected ? (
           <DonateRange>
             <TargetWrap>
               <Image src={MyIcon} layout="fixed" alt="banner" />
@@ -79,14 +127,16 @@ function DonateCard() {
           </ProgressBar>
         </ProgressWrap>
 
-        {isConnected ? (
+        {_isConnected ? (
           <ConnectedWrap>
             <ContractBox>
               <AddressCover>지갑주소{address}</AddressCover>
 
-              <div>
-                Balance: {data?.formatted} {data?.symbol} 원
-              </div>
+              <>
+                <div>
+                  Balance: {data?.formatted} {data?.symbol} 원
+                </div>
+              </>
             </ContractBox>
             <StyledInput
               onChange={onPriceChange}
@@ -115,7 +165,7 @@ function DonateCard() {
           <TimeTitle>종료까지 남은 시간</TimeTitle>
           <TimeLeft>00일 00시 00분 00초</TimeLeft>
         </DonateTime>
-        <DonateButton>기부하기</DonateButton>
+        <DonateButton onClick={onDonate}>기부하기</DonateButton>
       </CardWrap>
     </Wrap>
   );
@@ -257,6 +307,7 @@ const ContractBox = styled.div`
   width: 403px;
   height: 54px;
   margin-top: 24px;
+  z-index: 100;
 `;
 
 const StyledInput = styled.input`

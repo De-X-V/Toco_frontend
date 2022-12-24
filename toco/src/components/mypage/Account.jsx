@@ -48,6 +48,7 @@ export default function Account() {
   return (
     <Wrap>
       <Title>My Page</Title>
+      <div></div>
       <AccountWrap>
         {!walletConnect ? (
           <>
