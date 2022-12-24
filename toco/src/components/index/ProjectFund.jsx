@@ -25,38 +25,6 @@ export default function ProjectFund() {
     container.scrollBy({ left: -350, behavior: "smooth" });
   };
 
-  const dummyUsers = [
-    {
-      p_funding_title: "김치 기부하기",
-      p_funding_id: 1,
-      p_funding_end_date: "2022-12-25",
-      p_funding_target_amont: 10,
-      p_funding_status: "모금 진행중",
-      p_funding_tags1: "반찬",
-      p_funding_tags2: "기부",
-      p_funding_tags3: "어르신",
-    },
-    {
-      p_funding_title: "다른거 기부하기",
-      p_funding_id: 1,
-      p_funding_end_date: "2022-12-25",
-      p_funding_target_amont: 10,
-      p_funding_status: "모금 종료",
-      p_funding_tags1: "반찬",
-      p_funding_tags2: "기부",
-      p_funding_tags3: "어르신",
-    },
-    {
-      p_funding_title: "다른거2 기부하기",
-      p_funding_id: 1,
-      p_funding_end_date: "2022-12-25",
-      p_funding_target_amont: 10,
-      p_funding_status: "모금 예정",
-      p_funding_tags1: "반찬",
-      p_funding_tags2: "기부",
-      p_funding_tags3: "어르신",
-    },
-  ];
   /*
   const getDday = (end) => {
     const endDate = new Date(end);
@@ -110,7 +78,7 @@ export default function ProjectFund() {
           <Container ref={scrollRef}>
             {users.map((card) => (
               <FundCard
-                //imgSrc={card.p_funding_images}
+                imgSrc={card.p_funding_images}
                 title={card.p_funding_title}
                 id={card.p_funding_id}
                 date={getDday(card.p_funding_end_date)}
@@ -121,14 +89,6 @@ export default function ProjectFund() {
                 tags3={card.p_funding_tags3}
               />
             ))}
-            <FundCard imgSrc={Kimchi} />
-            <FundCard imgSrc={Room} />
-            <FundCard imgSrc={Food} />
-            <FundCard />
-            <FundCard />
-            <FundCard />
-            <FundCard />
-            <FundCard />
           </Container>
           <RightButton onClick={handleClick}>&gt;</RightButton>
         </StyledDiv>

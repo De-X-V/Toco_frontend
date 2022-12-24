@@ -31,7 +31,12 @@ export default function FundCard({
       as={`/FundDetail/${post.id}`}
     >
       <StyledCard id={id}>
-        <Image src={imgSrc} width="350px" height="160px" />
+        <Image
+          src={imgSrc}
+          width="350px"
+          height="160px"
+          style={{ borderRadius: "16px 16px 0 0" }}
+        />
         <StyledStatus>{status}</StyledStatus>
         <StyledDesWrap>
           <StyledFundDes>

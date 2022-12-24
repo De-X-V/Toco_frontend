@@ -1,7 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ["ipfs.infura.io", "localhost", "*", "ca-times.brightspotcdn.com"],
+    domains: [
+      "ipfs.infura.io",
+      "localhost",
+      "*",
+      "ca-times.brightspotcdn.com",
+      "static.nike.com",
+    ],
   },
   reactStrictMode: true,
   swcMinify: true,

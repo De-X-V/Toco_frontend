@@ -3,24 +3,65 @@ import styled from "styled-components";
 import useScrollFadeIn from "../../../src/hooks/useScrollFadeIn";
 import { useHorizontalScroll } from "../../hooks/useHorizontalScroll";
 import FundCard from "../fund/FundCard";
-import { useRef, useEffect } from "react";
+import { useRef, useState, useEffect } from "react";
+
+import { firestore } from "../../api/firebase";
+import { collection, getDocs } from "firebase/firestore";
 
 export default function ChangeFund() {
   const scrollRef = useHorizontalScroll();
+
+  // 이따가 users 추가하고 삭제하는거 진행을 도와줄 state
+  const [users, setUsers] = useState([]);
+
+  // db의 users 컬렉션을 가져옴
+  const usersCollectionRef = collection(firestore, "changeFunding");
+
+  // 시작될때 한번만 실행
+  const getDday = (end) => {
+    const today = new Date().getTime() / 1000;
+
+    const d = Math.round((end.seconds - today) / 86400);
+    console.log(end.seconds, today, d);
+    if (d < 0) {
+      d = "+" + -d;
+    } else {
+      d = "-" + d;
+    }
+    return d;
+  };
+
+  useEffect(() => {
+    // 비동기로 데이터 받을준비
+    const getUsers = async () => {
+      // getDocs로 컬렉션안에 데이터 가져오기
+      const data = await getDocs(usersCollectionRef);
+      // users에 data안의 자료 추가. 객체에 id 덮어씌우는거
+      setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    };
+    getUsers();
+    console.log(users);
+  }, []);
+
   return (
     <Wrap>
       <Title>잔돈 펀딩</Title>
       <ContainerWrap>
         <StyledDiv>
           <Container ref={scrollRef}>
-            <FundCard />
-            <FundCard />
-            <FundCard />
-            <FundCard />
-            <FundCard />
-            <FundCard />
-            <FundCard />
-            <FundCard />
+            {users.map((card) => (
+              <FundCard
+                imgSrc={card.c_funding_images}
+                title={card.c_funding_title}
+                id={card.c_funding_id}
+                date={getDday(card.c_funding_end_date)}
+                amount={card.c_funding_target_amont}
+                status={card.c_funding_status}
+                tags1={card.c_funding_tags1}
+                tags2={card.c_funding_tags2}
+                tags3={card.c_funding_tags3}
+              />
+            ))}
           </Container>
         </StyledDiv>
       </ContainerWrap>
