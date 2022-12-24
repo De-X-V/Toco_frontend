@@ -25,10 +25,8 @@ function AppBar() {
   const [walletConnect, setWalletConnect] = useState(false);
 
   useEffect(() => {
-    if (isConnected) {
-      setWalletConnect(isConnected);
-      setUserAddress(address);
-    }
+    setWalletConnect(isConnected);
+    setUserAddress(address);
   }, [walletConnect, isConnected]);
 
   return (

@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Image from "next/image";
 import Icon from "../../../public/FundDetail/Icon.png";
 import MyIcon from "../../../public/FundDetail/myicon.png";
-import { useAccount, useBalance, useConnect } from "wagmi";
+import { useAccount, useBalance, useConnect, useContract } from "wagmi";
 
 import { useRecoilState } from "recoil";
 import { userAtom } from "../../recoil/recoilUserState";
@@ -21,12 +21,6 @@ function DonateCard() {
     setPercent(50);
   }, [percent]);
 
-  //web3
-  const Web3 = require("web3");
-
-  const web3 = new Web3(
-    "https://goerli.infura.io/v3/e7e63350a02446cd83ab4073d9c266d4"
-  );
   const contract = getPfundingContract();
 
   useEffect(() => {
@@ -34,7 +28,7 @@ function DonateCard() {
       .getFunding()
       .call()
       .then((a) => {
-        console.log("연결 완료", a[0]);
+        console.log("연결 완료", a);
       });
   }, []);
 

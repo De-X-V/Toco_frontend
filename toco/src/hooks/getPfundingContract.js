@@ -1,5 +1,6 @@
 import pFundingABI from "../contracts/abi/pFunding.json";
 import { pFundingAddress } from "../contracts/contract";
+import { useContract } from "wagmi";
 
 const Web3 = require("web3");
 
@@ -8,5 +9,14 @@ const web3 = new Web3(
 );
 export const getPfundingContract = () => {
   const contract = new web3.eth.Contract(pFundingABI, pFundingAddress);
+
+  /*
+  const contract = useContract({
+    address: pFundingAddress,
+
+    abi: pFundingABI,
+  });
+  */
+
   return contract;
 };
