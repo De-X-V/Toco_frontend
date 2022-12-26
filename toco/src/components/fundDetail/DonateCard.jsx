@@ -24,16 +24,29 @@ function DonateCard() {
   const contract = getPfundingContract();
 
   useEffect(() => {
+    /*
+    const getFund = async () => {
+      const result = await contract.functions.getFunding();
+      return result;
+    };
+
+    console.log(getFund().then((a) => console.log(a)));
+    */
+
+    console.log(contract.functions.getFunding().then((a) => console.log(a)));
+
+    /*
     contract.methods
       .getFunding()
       .call()
       .then((a) => {
         console.log("연결 완료", a);
       });
+      */
   }, []);
 
   //wagmi
-  const { address, connector, isConnected } = useAccount();
+  const { address, isConnected } = useAccount();
   const { connect, connectors } = useConnect();
   const [_isConnected, _setIsConnected] = useState(false);
   const [_connectors, _setConnectors] = useState([]);
