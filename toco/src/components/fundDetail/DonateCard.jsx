@@ -24,16 +24,14 @@ function DonateCard() {
   const contract = getPfundingContract();
 
   useEffect(() => {
-    /*
     const getFund = async () => {
       const result = await contract.functions.getFunding();
       return result;
     };
 
     console.log(getFund().then((a) => console.log(a)));
-    */
 
-    console.log(contract.functions.getFunding().then((a) => console.log(a)));
+    //console.log(contract.functions.getFunding().then((a) => console.log(a)));
 
     /*
     contract.methods
