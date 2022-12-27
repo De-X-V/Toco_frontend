@@ -1,8 +1,58 @@
-import React from "react";
+import { React, useState, useEffect } from "react";
 import Image from "next/image";
 import kimchi from "../../../public/ProjectImg/kimchi.png";
 import styled from "styled-components";
+
+import { firestore } from "../../api/firebase";
+import { collection, getDocs } from "firebase/firestore";
+import { useRouter } from "next/router";
 function FundDes() {
+  const [users, setUsers] = useState([]);
+
+  // db의 users 컬렉션을 가져옴
+  const usersCollectionRef = collection(firestore, "projectFunding");
+
+  const router = useRouter();
+  const [cardLink, setCardLink] = useState();
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    setCardLink(router.query.FundDetail);
+    if (typeof cardLink == "string") {
+      setOpen(true);
+      console.log(typeof cardLink);
+      console.log(cardLink);
+
+      const docRef = firestore.collection("projectFunding").doc(cardLink);
+      docRef.get().then((doc) => {
+        if (doc.exists) {
+          const data = doc.data();
+          console.log(data);
+        } else {
+          console.log("No such document!");
+        }
+      });
+    }
+  }, [cardLink]);
+
+  /*
+  useEffect(() => {
+    if (open) {
+      console.log(cardLink);
+
+      const docRef = firestore.collection("projectFunding").doc(cardLink);
+      docRef.get().then((doc) => {
+        if (doc.exists) {
+          const data = doc.data();
+          console.log(data);
+        } else {
+          console.log("No such document!");
+        }
+      });
+    }
+  }, [cardLink]);
+  */
+
   return (
     <Wrap>
       <Image

@@ -81,6 +81,7 @@ export default function ProjectFund() {
                 imgSrc={card.p_funding_images}
                 title={card.p_funding_title}
                 id={card.p_funding_id}
+                linkId={card.id}
                 date={getDday(card.p_funding_end_date)}
                 amount={card.p_funding_target_amont}
                 status={card.p_funding_status}

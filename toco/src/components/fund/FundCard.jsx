@@ -19,14 +19,16 @@ export default function FundCard({
 }) {
   const post = {
     id: linkId,
+    dummy: "jo",
   };
   return (
     <Link
       href={{
         pathname: `/FundDetail/[id]`,
         query: {
+          name: "test",
           data: JSON.stringify(post),
-          // post: 넘어간 페이지에서 쓸 데이터들
+          // 넘어간 페이지에서 쓸 데이터들
         },
       }}
       as={`/FundDetail/${post.id}`}
