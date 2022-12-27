@@ -24,14 +24,13 @@ export default function FundCard({
   return (
     <Link
       href={{
-        pathname: `/FundDetail/[id]`,
+        pathname: `/FundDetail/${post.id}`,
         query: {
           name: "test",
           data: JSON.stringify(post),
           // 넘어간 페이지에서 쓸 데이터들
         },
       }}
-      as={`/FundDetail/${post.id}`}
     >
       <StyledCard id={id}>
         <Image

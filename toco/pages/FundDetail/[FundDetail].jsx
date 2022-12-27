@@ -10,18 +10,12 @@ function FundDetail() {
   const router = useRouter();
   const [cardLink, setCardLink] = useState();
   const [open, setOpen] = useState(false);
+  const fundingSort = "projectFunding";
 
-  useEffect(() => {
-    setCardLink(router.query.FundDetail);
-    if (typeof cardLink == "string") {
-      setOpen(true);
-      console.log(typeof cardLink);
-    }
-  }, [cardLink]);
   return (
     <Wrap>
       <>
-        <FundDes></FundDes>
+        <FundDes fundingSort={fundingSort}></FundDes>
         <DonateCard></DonateCard>
       </>
     </Wrap>

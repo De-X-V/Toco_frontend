@@ -6,58 +6,31 @@ import styled from "styled-components";
 import { firestore } from "../../api/firebase";
 import { collection, getDocs } from "firebase/firestore";
 import { useRouter } from "next/router";
-function FundDes() {
-  const [users, setUsers] = useState([]);
-
-  // db의 users 컬렉션을 가져옴
-  const usersCollectionRef = collection(firestore, "projectFunding");
-
+function FundDes({ fundingSort }) {
   const router = useRouter();
+  const result = router.query.FundDetail;
+
   const [cardLink, setCardLink] = useState();
 
   useEffect(() => {
-    const CardSet = async () => {
-      const result = router.query.FundDetail;
-      return result;
-    };
-    CardSet().then((result) => {
-      setCardLink(result);
-      if (typeof cardLink == "string") {
-        console.log(typeof cardLink);
-        console.log(cardLink);
+    console.log(result);
+    setCardLink(result);
+    console.log(typeof cardLink);
+    console.log(router.isReady);
+    if (!router.isReady) return;
+    console.log(typeof cardLink);
+    console.log(cardLink);
 
-        const docRef = firestore.collection("projectFunding").doc(cardLink);
-        docRef.get().then((doc) => {
-          if (doc.exists) {
-            const data = doc.data();
-            console.log(data);
-          } else {
-            console.log("No such document!");
-          }
-        });
+    const docRef = firestore.collection(fundingSort).doc(cardLink);
+    docRef.get().then((doc) => {
+      if (doc.exists) {
+        const data = doc.data();
+        console.log(data);
       } else {
-        setCardLink(result);
+        console.log("No such document!");
       }
     });
-  }, [cardLink]);
-
-  /*
-  useEffect(() => {
-    if (open) {
-      console.log(cardLink);
-
-      const docRef = firestore.collection("projectFunding").doc(cardLink);
-      docRef.get().then((doc) => {
-        if (doc.exists) {
-          const data = doc.data();
-          console.log(data);
-        } else {
-          console.log("No such document!");
-        }
-      });
-    }
-  }, [cardLink]);
-  */
+  }, [router.isReady, cardLink]);
 
   return (
     <Wrap>

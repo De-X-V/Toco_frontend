@@ -7,6 +7,7 @@ const nextConfig = {
       "*",
       "ca-times.brightspotcdn.com",
       "static.nike.com",
+      "images.unsplash.com",
     ],
   },
   reactStrictMode: true,

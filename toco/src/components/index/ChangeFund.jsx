@@ -7,7 +7,7 @@ import { useRef, useState, useEffect } from "react";
 
 import { firestore } from "../../api/firebase";
 import { collection, getDocs } from "firebase/firestore";
-
+import { getDday } from "../../hooks/getDday";
 export default function ChangeFund() {
   const scrollRef = useHorizontalScroll();
 
@@ -16,20 +16,6 @@ export default function ChangeFund() {
 
   // db의 users 컬렉션을 가져옴
   const usersCollectionRef = collection(firestore, "changeFunding");
-
-  // 시작될때 한번만 실행
-  const getDday = (end) => {
-    const today = new Date().getTime() / 1000;
-
-    const d = Math.round((end.seconds - today) / 86400);
-    console.log(end.seconds, today, d);
-    if (d < 0) {
-      d = "+" + -d;
-    } else {
-      d = "-" + d;
-    }
-    return d;
-  };
 
   useEffect(() => {
     // 비동기로 데이터 받을준비
