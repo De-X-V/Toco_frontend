@@ -14,12 +14,14 @@ function FundDes() {
 
   const router = useRouter();
   const [cardLink, setCardLink] = useState();
-  const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    setCardLink(router.query.FundDetail);
+    const CardSet = async () => {
+      const result = router.query.FundDetail;
+      return result;
+    };
+    CardSet().then((result) => setCardLink(result));
     if (typeof cardLink == "string") {
-      setOpen(true);
       console.log(typeof cardLink);
       console.log(cardLink);
 
@@ -32,6 +34,8 @@ function FundDes() {
           console.log("No such document!");
         }
       });
+    } else {
+      console.log(typeof cardLink);
     }
   }, [cardLink]);
 
