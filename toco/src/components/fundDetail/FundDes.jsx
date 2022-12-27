@@ -20,23 +20,25 @@ function FundDes() {
       const result = router.query.FundDetail;
       return result;
     };
-    CardSet().then((result) => setCardLink(result));
-    if (typeof cardLink == "string") {
-      console.log(typeof cardLink);
-      console.log(cardLink);
+    CardSet().then((result) => {
+      setCardLink(result);
+      if (typeof cardLink == "string") {
+        console.log(typeof cardLink);
+        console.log(cardLink);
 
-      const docRef = firestore.collection("projectFunding").doc(cardLink);
-      docRef.get().then((doc) => {
-        if (doc.exists) {
-          const data = doc.data();
-          console.log(data);
-        } else {
-          console.log("No such document!");
-        }
-      });
-    } else {
-      console.log(typeof cardLink);
-    }
+        const docRef = firestore.collection("projectFunding").doc(cardLink);
+        docRef.get().then((doc) => {
+          if (doc.exists) {
+            const data = doc.data();
+            console.log(data);
+          } else {
+            console.log("No such document!");
+          }
+        });
+      } else {
+        setCardLink(result);
+      }
+    });
   }, [cardLink]);
 
   /*
