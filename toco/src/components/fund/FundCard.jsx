@@ -26,9 +26,7 @@ export default function FundCard({
       href={{
         pathname: `/FundDetail/${post.id}`,
         query: {
-          name: "test",
-          data: JSON.stringify(post),
-          // 넘어간 페이지에서 쓸 데이터들
+          name: title,
         },
       }}
     >
