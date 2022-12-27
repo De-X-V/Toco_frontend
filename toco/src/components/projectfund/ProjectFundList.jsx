@@ -25,9 +25,12 @@ function ProjectFundList() {
       const data = await getDocs(usersCollectionRef);
       // users에 data안의 자료 추가. 객체에 id 덮어씌우는거
       setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+      console.log(data.docs[0].id);
     };
     getUsers();
+
     console.log(users);
+    console.log("hi");
   }, []);
 
   return (
@@ -40,6 +43,7 @@ function ProjectFundList() {
               imgSrc={card.p_funding_images}
               title={card.p_funding_title}
               id={card.p_funding_id}
+              linkId={card.id}
               date={getDday(card.p_funding_end_date)}
               amount={card.p_funding_target_amont}
               status={card.p_funding_status}

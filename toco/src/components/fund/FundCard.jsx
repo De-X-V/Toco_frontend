@@ -9,6 +9,7 @@ export default function FundCard({
   imgSrc,
   title,
   id,
+  linkId,
   date,
   amount,
   status,
@@ -17,7 +18,7 @@ export default function FundCard({
   tags3,
 }) {
   const post = {
-    id: "abc",
+    id: linkId,
   };
   return (
     <Link
