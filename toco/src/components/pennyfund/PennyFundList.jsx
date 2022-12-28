@@ -45,18 +45,6 @@ function PennyFundList() {
             />
           </CardWrap>
         ))}
-        <CardWrap>
-          <FundCard />
-        </CardWrap>
-        <CardWrap>
-          <FundCard />
-        </CardWrap>{" "}
-        <CardWrap>
-          <FundCard />
-        </CardWrap>{" "}
-        <CardWrap>
-          <FundCard />
-        </CardWrap>
       </CardList>
     </Wrap>
   );
