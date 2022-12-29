@@ -4,14 +4,8 @@ import Image from "next/image";
 import Icon from "../../../public/FundDetail/Icon.png";
 import MyIcon from "../../../public/FundDetail/myicon.png";
 import { useAccount, useBalance, useConnect, useContract } from "wagmi";
-
-import { useRecoilState } from "recoil";
-import { userAtom } from "../../recoil/recoilUserState";
-
-import pFundingABI from "../../contracts/abi/pFunding.json";
-import { pFundingAddress } from "../../contracts/contract";
-
 import { getPfundingContract } from "../../hooks/getPfundingContract";
+import { ethers } from "ethers";
 
 function DonateCard() {
   const [percent, setPercent] = useState(75);
@@ -27,7 +21,10 @@ function DonateCard() {
     const getFund = async () => {
       try {
         const result = await contract.getFunding();
+        const result2 = await contract.getBalance();
         console.log(result);
+        console.log(contract.address);
+        console.log(result2.toNumber());
       } catch (err) {
         console.log(err);
       }
@@ -75,13 +72,15 @@ function DonateCard() {
     }
   };
   const onDonate = () => {
-    contract.methods
-      .donate(100000)
-      .send({
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+    const contractWithSigner = contract.connect(signer);
+    contractWithSigner
+      .donate(10000000000, {
         from: address,
         gasPrice: "30000000000",
-        gas: "300000",
-        value: "100000",
+        gasLimit: "300000",
+        value: "10000000000",
       })
       .then(console.log);
   };
