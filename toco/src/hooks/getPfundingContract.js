@@ -2,6 +2,7 @@ import pFundingABI from "../contracts/abi/pFunding.json";
 import { pFundingAddress } from "../contracts/contract";
 import { useContract } from "wagmi";
 import { ethers } from "ethers";
+import { useEffect, useState } from "react";
 
 const Web3 = require("web3");
 
@@ -17,14 +18,18 @@ export const getPfundingContract = () => {
     abi: pFundingABI,
   });
   */
-  const provider = new ethers.providers.Web3Provider(window.ethereum);
-  const signer = provider.getSigner();
-  const contract = new ethers.Contract(
-    pFundingAddress,
-    pFundingABI,
-    provider
-    //signer
-  );
+  const [contract, setContract] = useState();
+  useEffect(() => {
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+    const contract = new ethers.Contract(
+      pFundingAddress,
+      pFundingABI,
+      provider
+      //signer
+    );
+    setContract(contract);
+  }, []);
 
   return contract;
 };

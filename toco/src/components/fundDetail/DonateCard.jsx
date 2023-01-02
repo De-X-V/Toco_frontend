@@ -7,7 +7,7 @@ import { useAccount, useBalance, useConnect, useContract } from "wagmi";
 import { getPfundingContract } from "../../hooks/getPfundingContract";
 import { ethers } from "ethers";
 
-function DonateCard() {
+function DonateCard({ cards }) {
   const [percent, setPercent] = useState(75);
   const [fundPrice, setFundPrice] = useState("");
 

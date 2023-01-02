@@ -6,11 +6,13 @@ import styled from "styled-components";
 import { firestore } from "../../api/firebase";
 import { collection, getDocs } from "firebase/firestore";
 import { useRouter } from "next/router";
-function FundDes({ fundingSort }) {
+function FundDes({ fundingSort, cards }) {
+  /*
   const router = useRouter();
   const result = router.query.FundDetail;
 
   const [cardLink, setCardLink] = useState();
+  const [cards, setCards] = useState([]);
 
   useEffect(() => {
     console.log(result);
@@ -26,31 +28,26 @@ function FundDes({ fundingSort }) {
       if (doc.exists) {
         const data = doc.data();
         console.log(data);
+        setCards(data);
+        console.log(cards);
       } else {
         console.log("No such document!");
       }
     });
   }, [router.isReady, cardLink]);
+  */
 
   return (
     <Wrap>
       <Image
-        src={kimchi}
+        src={cards.p_funding_images}
         layout="fixed"
         width={750}
         height={480}
         alt="banner"
       />
       <DesTitle>기부 기획 의도</DesTitle>
-      <DesBox>
-        치아가 없고, 궁핍한 생활을 하는 독거노인들은 라면을 주식으로 삼습니다.
-        변변한 반찬 없이 먹는 하루 세 봉지의 라면 한국인의 소울푸드인 김치라도
-        상에 올려드리려고 합니다. 1포기당 3만원으로 책정돼, 팀 내에서 10만원을
-        추가로 기부 70포기의 김치를 독거노인 분들께 기부하고자 합니다. 업체는
-        커뮤니티 내 투표 결과, (주)갓김치만세를 통해 진행될 예정이며, 기부
-        대상자는 투표 결과에 따라 서울 신정동, 행복주택에 거주하시는
-        독거노인분들을 대상으로 합니다.
-      </DesBox>
+      <DesBox>{cards.p_funding_content}</DesBox>
     </Wrap>
   );
 }

@@ -5,18 +5,45 @@ import DonateCard from "../../src/components/fundDetail/DonateCard";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { firestore } from "../../src/api/firebase";
 
 function FundDetail() {
-  const router = useRouter();
-  const [cardLink, setCardLink] = useState();
   const [open, setOpen] = useState(false);
   const fundingSort = "projectFunding";
+
+  const router = useRouter();
+  const result = router.query.FundDetail;
+
+  const [cardLink, setCardLink] = useState();
+  const [cards, setCards] = useState([]);
+
+  useEffect(() => {
+    console.log(result);
+    setCardLink(result);
+    console.log(typeof cardLink);
+    console.log(router.isReady);
+    if (!router.isReady) return;
+    console.log(typeof cardLink);
+    console.log(cardLink);
+
+    const docRef = firestore.collection(fundingSort).doc(cardLink);
+    docRef.get().then((doc) => {
+      if (doc.exists) {
+        const data = doc.data();
+        console.log(data);
+        setCards(data);
+        console.log(cards);
+      } else {
+        console.log("No such document!");
+      }
+    });
+  }, [router.isReady, cardLink]);
 
   return (
     <Wrap>
       <>
-        <FundDes fundingSort={fundingSort}></FundDes>
-        <DonateCard></DonateCard>
+        <FundDes fundingSort={fundingSort} cards={cards}></FundDes>
+        <DonateCard cards={cards}></DonateCard>
       </>
     </Wrap>
   );
