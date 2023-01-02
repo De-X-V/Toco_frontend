@@ -6,6 +6,7 @@ import MyIcon from "../../../public/FundDetail/myicon.png";
 import { useAccount, useBalance, useConnect, useContract } from "wagmi";
 import { getPfundingContract } from "../../hooks/getPfundingContract";
 import { ethers } from "ethers";
+import { getDday } from "../../hooks/getDday";
 
 function DonateCard({ cards }) {
   const [percent, setPercent] = useState(75);
@@ -84,12 +85,17 @@ function DonateCard({ cards }) {
       })
       .then(console.log);
   };
+
+  useEffect(() => {
+    console.log(" 테스트", cards.p_funding_end_date);
+  });
+
   return (
     <Wrap>
       <CardWrap>
         <DonateDes>
-          <DonateName>독거 어르신에게 김치 기부하기</DonateName>
-          <DonateTarget>목표 모금액 2,0000,000원</DonateTarget>
+          <DonateName>{cards.p_funding_title}</DonateName>
+          <DonateTarget>{cards.p_funding_details}</DonateTarget>
         </DonateDes>
         <DonateRange>
           <TargetWrap>
@@ -169,7 +175,7 @@ function DonateCard({ cards }) {
         )}
         <DonateTime>
           <TimeTitle>종료까지 남은 시간</TimeTitle>
-          <TimeLeft>00일 00시 00분 00초</TimeLeft>
+          <TimeLeft>/00일 00시 00분 00초</TimeLeft>
         </DonateTime>
         <DonateButton onClick={onDonate}>기부하기</DonateButton>
       </CardWrap>
