@@ -21,24 +21,20 @@
       }
     ],
     "stateMutability": "view",
-    "type": "function",
-    "constant": true
+    "type": "function"
   },
   {
     "inputs": [{ "internalType": "address", "name": "", "type": "address" }],
     "name": "donateList",
     "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "stateMutability": "view",
-    "type": "function",
-    "constant": true
+    "type": "function"
   },
   {
     "inputs": [],
     "name": "newFunding",
     "outputs": [
       { "internalType": "string", "name": "fundingName", "type": "string" },
-      { "internalType": "uint256", "name": "targetAmount", "type": "uint256" },
-      { "internalType": "uint256", "name": "currentAmount", "type": "uint256" },
       {
         "internalType": "uint256",
         "name": "fundingStartDate",
@@ -47,13 +43,11 @@
       { "internalType": "uint256", "name": "fundingEndDate", "type": "uint256" }
     ],
     "stateMutability": "view",
-    "type": "function",
-    "constant": true
+    "type": "function"
   },
   {
     "inputs": [
       { "internalType": "string", "name": "_fundingName", "type": "string" },
-      { "internalType": "uint256", "name": "_targetAmount", "type": "uint256" },
       {
         "internalType": "uint256",
         "name": "_fundingStartDate",
@@ -71,22 +65,25 @@
     "type": "function"
   },
   {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_fundingEndDate",
+        "type": "uint256"
+      }
+    ],
+    "name": "extendEndDate",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
     "inputs": [],
     "name": "getFunding",
     "outputs": [
       {
         "components": [
           { "internalType": "string", "name": "fundingName", "type": "string" },
-          {
-            "internalType": "uint256",
-            "name": "targetAmount",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "currentAmount",
-            "type": "uint256"
-          },
           {
             "internalType": "uint256",
             "name": "fundingStartDate",
@@ -104,8 +101,7 @@
       }
     ],
     "stateMutability": "view",
-    "type": "function",
-    "constant": true
+    "type": "function"
   },
   {
     "inputs": [
@@ -114,16 +110,21 @@
     "name": "donate",
     "outputs": [],
     "stateMutability": "payable",
-    "type": "function",
-    "payable": true
+    "type": "function"
   },
   {
     "inputs": [],
     "name": "getBalance",
     "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "stateMutability": "view",
-    "type": "function",
-    "constant": true
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getMyDonateAmount",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
   },
   {
     "inputs": [

@@ -6,19 +6,39 @@ import MyIcon from "../../../public/FundDetail/myicon.png";
 import { useAccount, useBalance, useConnect, useContract } from "wagmi";
 import { getPfundingContract } from "../../hooks/getPfundingContract";
 import { ethers } from "ethers";
+import { getLastTime } from "../../hooks/getLastTime";
 import { getDday } from "../../hooks/getDday";
 
-function DonateCard({ cards }) {
+function DonateCard({ cards, contract }) {
   const [percent, setPercent] = useState(75);
   const [fundPrice, setFundPrice] = useState("");
-
+  const [lastday, setLastDay] = useState();
+  const [fContract, getFcontract] = useState(contract);
+  const [myValue, setMyValue] = useState();
+  const [fCards, setFcards] = useState();
   useEffect(() => {
     setPercent(50);
   }, [percent]);
-
-  const contract = getPfundingContract();
+  useEffect(() => {
+    if (typeof fContract != "undefined") {
+      console.log(fContract);
+      fContract
+        .getMyDonateAmount()
+        .then((e) => setMyValue(ethers.utils.formatEther(e)));
+    }
+  }, [fContract]);
 
   useEffect(() => {
+    console.log(fCards);
+    setFcards(cards);
+    if (typeof fCards != "undefined") {
+      console.log(cards.p_funding_details);
+    }
+  }, [fCards]);
+
+  /*
+  useEffect(() => {
+    console.log(contract);
     const getFund = async () => {
       try {
         const result = await contract.getFunding();
@@ -31,17 +51,16 @@ function DonateCard({ cards }) {
       }
     };
     getFund();
-    //contract.functions.getFunding().then((a) => console.log(a));
+    contract.functions.getFunding().then((a) => console.log(a));
 
-    /*
     contract.methods
       .getFunding()
       .call()
       .then((a) => {
         console.log("연결 완료", a);
       });
-      */
   }, []);
+  */
 
   //wagmi
   const { address, isConnected } = useAccount();
@@ -50,7 +69,7 @@ function DonateCard({ cards }) {
   const [_connectors, _setConnectors] = useState([]);
 
   const { data, isError, isLoading } = useBalance({
-    address: "0xA0Cf798816D4b9b9866b5330EEa46a18382f251e",
+    address: cards.p_funding_ca,
     //address: `${address}`,
     chainId: 1,
   });
@@ -75,20 +94,19 @@ function DonateCard({ cards }) {
   const onDonate = () => {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
-    const contractWithSigner = contract.connect(signer);
-    contractWithSigner
-      .donate(10000000000, {
-        from: address,
-        gasPrice: "30000000000",
-        gasLimit: "300000",
-        value: "10000000000",
-      })
-      .then(console.log);
-  };
+    try {
+      const contractWithSigner = contract.connect(signer);
+      contractWithSigner
+        .donate(BigInt(1000000000000000000), {
+          from: address,
 
-  useEffect(() => {
-    console.log(" 테스트", cards.p_funding_end_date);
-  });
+          value: "1000000000000000000",
+        })
+        .then(console.log);
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   return (
     <Wrap>
@@ -102,7 +120,7 @@ function DonateCard({ cards }) {
             <Image src={Icon} layout="fixed" alt="banner" />
             <TagetDivBox>
               <div>누적 모금액</div>
-              <Target2>500,000원</Target2>
+              <Target2>{data?.formatted}ETH</Target2>
             </TagetDivBox>
           </TargetWrap>
           <TargetWrap>
@@ -119,7 +137,7 @@ function DonateCard({ cards }) {
               <Image src={MyIcon} layout="fixed" alt="banner" />
               <TagetDivBox>
                 <div>나의 기부액</div>
-                <Target2>5 KLAY</Target2>
+                <Target2>{myValue} ETH</Target2>
               </TagetDivBox>
             </TargetWrap>
             <TargetWrap>
@@ -142,13 +160,8 @@ function DonateCard({ cards }) {
         {_isConnected ? (
           <ConnectedWrap>
             <ContractBox>
-              <AddressCover>지갑주소{address}</AddressCover>
-
-              <>
-                <div>
-                  Balance: {data?.formatted} {data?.symbol} 원
-                </div>
-              </>
+              <AddressCover>기부 주소</AddressCover>
+              <AddressCover>{cards.p_funding_ca}</AddressCover>
             </ContractBox>
             <StyledInput
               onChange={onPriceChange}
@@ -156,17 +169,17 @@ function DonateCard({ cards }) {
               placeholder="금액 입력하기"
             ></StyledInput>
             <ButtonWrap>
-              <StyledButton value={5} onClick={onPriceButton}>
-                +5KLAY
+              <StyledButton value={0.1} onClick={onPriceButton}>
+                +0.1ETH
               </StyledButton>
-              <StyledButton value={50} onClick={onPriceButton}>
-                +50KLAY
+              <StyledButton value={0.5} onClick={onPriceButton}>
+                +0.5ETH
               </StyledButton>
-              <StyledButton value={100} onClick={onPriceButton}>
-                +100KLAY
+              <StyledButton value={1} onClick={onPriceButton}>
+                +1ETH
               </StyledButton>
-              <StyledButton value={500} onClick={onPriceButton}>
-                +500KLAY
+              <StyledButton value={1.5} onClick={onPriceButton}>
+                +1.5ETH
               </StyledButton>
             </ButtonWrap>
           </ConnectedWrap>
@@ -175,7 +188,7 @@ function DonateCard({ cards }) {
         )}
         <DonateTime>
           <TimeTitle>종료까지 남은 시간</TimeTitle>
-          <TimeLeft>/00일 00시 00분 00초</TimeLeft>
+          <TimeLeft>{lastday}/00일 00시 00분 00초</TimeLeft>
         </DonateTime>
         <DonateButton onClick={onDonate}>기부하기</DonateButton>
       </CardWrap>
@@ -313,13 +326,23 @@ const ConnectedWrap = styled.div`
   color: white;
   background-color: #303135;
 `;
-const AddressCover = styled.div``;
+const AddressCover = styled.div`
+  font-family: "DM Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 23px;
+`;
 
 const ContractBox = styled.div`
   width: 403px;
   height: 54px;
   margin-top: 24px;
   z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 `;
 
 const StyledInput = styled.input`

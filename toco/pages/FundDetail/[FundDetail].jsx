@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { firestore } from "../../src/api/firebase";
+import { getPfundingContract } from "../../src/hooks/getPfundingContract";
 
 function FundDetail() {
   const [open, setOpen] = useState(false);
@@ -16,15 +17,16 @@ function FundDetail() {
 
   const [cardLink, setCardLink] = useState();
   const [cards, setCards] = useState([]);
+  const [contract, setContact] = useState();
+
+  const getContract = async (pFundingAddress) => {
+    return await getPfundingContract(pFundingAddress);
+  };
 
   useEffect(() => {
-    console.log(result);
     setCardLink(result);
-    console.log(typeof cardLink);
-    console.log(router.isReady);
+
     if (!router.isReady) return;
-    console.log(typeof cardLink);
-    console.log(cardLink);
 
     const docRef = firestore.collection(fundingSort).doc(cardLink);
     docRef.get().then((doc) => {
@@ -33,6 +35,7 @@ function FundDetail() {
         console.log(data);
         setCards(data);
         console.log(cards);
+        getContract(data.p_funding_ca).then((data) => setContact(data));
       } else {
         console.log("No such document!");
       }
@@ -43,7 +46,7 @@ function FundDetail() {
     <Wrap>
       <>
         <FundDes fundingSort={fundingSort} cards={cards}></FundDes>
-        <DonateCard cards={cards}></DonateCard>
+        <DonateCard cards={cards} contract={contract}></DonateCard>
       </>
     </Wrap>
   );
