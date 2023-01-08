@@ -46,8 +46,13 @@ function AppBar() {
         <Link href="/PennyFund">
           <StyledLink>잔돈펀딩</StyledLink>
         </Link>
-        <Link href="/Nft">
-          <StyledLink>NFT</StyledLink>
+        <Link
+          href="https://toco-p0t6di8p0-toco-minting-page.vercel.app/"
+          passHref
+        >
+          <StyledA target="_blank" rel="noopener noreferrer">
+            NFT
+          </StyledA>
         </Link>
         <Link href="/MyPage">
           <StyledLink>mypage</StyledLink>
@@ -55,20 +60,15 @@ function AppBar() {
       </StyledLinkBox>
       {!walletConnect ? (
         <>
-          <StyledProfile>
+          <StyledProfile onClick={() => connect()}>
             <Image src={Profile} width="40px" height="40px" />
           </StyledProfile>
-          <button onClick={() => connect()}>Connect Wallet</button>
         </>
       ) : (
         <>
-          <StyledProfile2>
+          <StyledProfile2 onClick={() => disconnect()}>
             <Image src={Profile} width="40px" height="40px" />
           </StyledProfile2>
-          <div>
-            Connected to {userAddress}
-            <button onClick={() => disconnect()}>Disconnect</button>
-          </div>
         </>
       )}
     </Wrap>
@@ -109,6 +109,16 @@ const StyledLinkBox = styled.div`
 const StyledLink = styled.div`
   /* Body/Medium */
 
+  font-family: "Noto Sans KR";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 23px;
+
+  margin-right: 32px;
+`;
+
+const StyledA = styled.a`
   font-family: "Noto Sans KR";
   font-style: normal;
   font-weight: 700;

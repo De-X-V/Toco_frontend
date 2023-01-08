@@ -41,7 +41,7 @@ const Home = () => {
   };
   return (
     <Wrap>
-      <button onClick={() => handleClickNavLink(0)}>테스트용 버튼</button>
+      {/*<button onClick={() => handleClickNavLink(0)}>테스트용 버튼</button>*/}
 
       <StyledFirst ref={heroRef}>
         <StyledBanner>
