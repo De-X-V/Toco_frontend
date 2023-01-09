@@ -8,6 +8,7 @@ import { ScrollMenu, VisibilityContext } from "react-horizontal-scrolling-menu";
 import Kimchi from "../../../public/ProjectImg/kimchi.png";
 import Room from "../../../public/ProjectImg/room.png";
 import Food from "../../../public/ProjectImg/food.png";
+import { getDday } from "../../hooks/getDday";
 
 import { firestore } from "../../api/firebase";
 import { collection, getDocs } from "firebase/firestore";
@@ -36,18 +37,6 @@ export default function ProjectFund() {
     return d;
   };
   */
-  const getDday = (end) => {
-    const today = new Date().getTime() / 1000;
-
-    const d = Math.round((end.seconds - today) / 86400);
-    console.log(end.seconds, today, d);
-    if (d < 0) {
-      d = "+" + -d;
-    } else {
-      d = "-" + d;
-    }
-    return d;
-  };
 
   // 이따가 users 추가하고 삭제하는거 진행을 도와줄 state
   const [users, setUsers] = useState([]);

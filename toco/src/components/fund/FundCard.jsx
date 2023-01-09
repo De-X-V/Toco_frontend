@@ -44,7 +44,7 @@ export default function FundCard({
             <StyledRange>
               <StyledDate>모금종료일 D{date} </StyledDate>
               <StyledAmount>
-                &nbsp; ·&nbsp; 목표 모금액 {amount} KLAY
+                &nbsp; ·&nbsp; 목표 모금액 {amount} ETH
               </StyledAmount>
             </StyledRange>
           </StyledFundDes>

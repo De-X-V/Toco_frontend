@@ -19,14 +19,16 @@ function DonateCard({ cards, contract }) {
   useEffect(() => {
     setPercent(50);
   }, [percent]);
+
   useEffect(() => {
     if (typeof fContract != "undefined") {
       console.log(fContract);
-      fContract
-        .getMyDonateAmount()
-        .then((e) => setMyValue(ethers.utils.formatEther(e)));
+      fContract.getMyDonateAmount().then((e) => {
+        setMyValue(ethers.utils.formatEther(e));
+        console.log(e, "hi");
+      });
     }
-  }, [fContract]);
+  }, [contract]);
 
   useEffect(() => {
     console.log(fCards);
@@ -113,7 +115,9 @@ function DonateCard({ cards, contract }) {
       <CardWrap>
         <DonateDes>
           <DonateName>{cards.p_funding_title}</DonateName>
-          <DonateTarget>{cards.p_funding_details}</DonateTarget>
+          <DonateTarget>
+            목표 모금액 : {cards.p_funding_target_amont} ETH
+          </DonateTarget>
         </DonateDes>
         <DonateRange>
           <TargetWrap>
@@ -127,7 +131,9 @@ function DonateCard({ cards, contract }) {
             <Image src={Icon} layout="fixed" alt="banner" />
             <TagetDivBox>
               <div>모금 진행률</div>
-              <Target2>67%</Target2>
+              <Target2>
+                {(data?.formatted / cards.p_funding_target_amont) * 100}%
+              </Target2>
             </TagetDivBox>
           </TargetWrap>
         </DonateRange>

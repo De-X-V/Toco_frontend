@@ -14,6 +14,15 @@ export default function ChangeFund() {
   // 이따가 users 추가하고 삭제하는거 진행을 도와줄 state
   const [users, setUsers] = useState([]);
 
+  const handleClick = () => {
+    const container = scrollRef.current;
+    container.scrollBy({ left: 350, behavior: "smooth" });
+  };
+  const handleClick2 = () => {
+    const container = scrollRef.current;
+    container.scrollBy({ left: -350, behavior: "smooth" });
+  };
+
   // db의 users 컬렉션을 가져옴
   const usersCollectionRef = collection(firestore, "changeFunding");
 
@@ -34,6 +43,7 @@ export default function ChangeFund() {
       <Title>잔돈 펀딩</Title>
       <ContainerWrap>
         <StyledDiv>
+          <LeftButton onClick={handleClick2}>&lt;</LeftButton>
           <Container ref={scrollRef}>
             {users.map((card) => (
               <FundCard
@@ -49,6 +59,7 @@ export default function ChangeFund() {
               />
             ))}
           </Container>
+          <RightButton onClick={handleClick}>&gt;</RightButton>
         </StyledDiv>
       </ContainerWrap>
     </Wrap>
@@ -84,6 +95,7 @@ const Title = styled.div`
 `;
 
 const StyledDiv = styled.div`
+  position: relative;
   margin-top: 40px;
   display: flex;
   height: 460px;
@@ -106,4 +118,36 @@ const Container = styled.div`
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
   }
+`;
+
+const LeftButton = styled.button`
+  position: absolute;
+  top: 200px;
+  left: 10px;
+  padding: 10px 10px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  :hover {
+    background-color: #444;
+  }
+  transition: background-color 0.2s ease-in-out;
+  z-index: 5;
+`;
+
+const RightButton = styled.button`
+  position: absolute;
+  top: 200px;
+  right: 10px;
+  padding: 10px 10px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  :hover {
+    background-color: #444;
+  }
+  transition: background-color 0.2s ease-in-out;
+  z-index: 5;
 `;
