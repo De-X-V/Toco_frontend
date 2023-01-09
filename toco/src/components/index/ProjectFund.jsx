@@ -26,18 +26,6 @@ export default function ProjectFund() {
     container.scrollBy({ left: -350, behavior: "smooth" });
   };
 
-  /*
-  const getDday = (end) => {
-    const endDate = new Date(end);
-    //Thu Dec 22 2022 16:26:45 GMT+0900 (한국 표준시)
-    const today = new Date(); //Thu Dec 22 2022 16:27:51 GMT+0900 (한국 표준시)
-    const diff = end * 1000 - today.getTime();
-    const d = Math.round(diff / 86400000);
-    console.log(end, endDate, today);
-    return d;
-  };
-  */
-
   // 이따가 users 추가하고 삭제하는거 진행을 도와줄 state
   const [users, setUsers] = useState([]);
 
