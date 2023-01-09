@@ -48,10 +48,10 @@ export default function Account() {
   return (
     <Wrap>
       <Title>My Page</Title>
-      <div></div>
+
       <AccountWrap>
         {!walletConnect ? (
-          <>
+          <StyledAccountWrap>
             <StyledProfile>
               <Image src={Profile} width="70x" height="70px" />
             </StyledProfile>
@@ -59,9 +59,9 @@ export default function Account() {
               <div>연결 x</div>
               <StyledAccountCode>연결 x</StyledAccountCode>
             </StyledAccount>
-          </>
+          </StyledAccountWrap>
         ) : (
-          <>
+          <StyledAccountWrap>
             <StyledProfile2>
               <Image src={Profile} width="70x" height="70px" />
             </StyledProfile2>
@@ -69,7 +69,7 @@ export default function Account() {
               <div> user1</div>
               <StyledAccountCode>{userAddress}</StyledAccountCode>
             </StyledAccount>
-          </>
+          </StyledAccountWrap>
         )}
       </AccountWrap>
     </Wrap>
@@ -96,6 +96,12 @@ const Title = styled.div`
 
   color: #ffffff;
 `;
+
+const StyledAccountWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 const AccountWrap = styled.div`
   display: flex;
   align-items: center;
@@ -108,7 +114,6 @@ const StyledProfile = styled.div`
   height: 80px;
   background-color: #ffd05a;
   border-radius: 40px;
-  margin-right: 40px;
 `;
 const StyledProfile2 = styled.div`
   display: flex;
@@ -118,7 +123,6 @@ const StyledProfile2 = styled.div`
   height: 80px;
   background-color: green;
   border-radius: 40px;
-  margin-right: 40px;
 `;
 const StyledAccount = styled.div`
   font-family: "Inter";

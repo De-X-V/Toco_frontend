@@ -1,10 +1,17 @@
 import React from "react";
 import styled from "styled-components";
+import Link from "next/link";
 function Support() {
   return (
     <Wrap>
       <StyledTitle>투코 프로젝트에 후원 해주세요</StyledTitle>
-      <StyledButton>후원하기</StyledButton>
+      <Link
+        href={{
+          pathname: `/FundDetail/z_adminFunding`,
+        }}
+      >
+        <StyledButton>후원하기</StyledButton>
+      </Link>
     </Wrap>
   );
 }

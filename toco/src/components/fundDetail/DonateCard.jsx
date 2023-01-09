@@ -9,26 +9,28 @@ import { ethers } from "ethers";
 import { getLastTime } from "../../hooks/getLastTime";
 import { getDday } from "../../hooks/getDday";
 
-function DonateCard({ cards, contract }) {
+function DonateCard({ cards, contract, myValue, lastday }) {
   const [percent, setPercent] = useState(75);
   const [fundPrice, setFundPrice] = useState("");
-  const [lastday, setLastDay] = useState();
-  const [fContract, getFcontract] = useState(contract);
-  const [myValue, setMyValue] = useState();
+
+  const [fContract, setFcontract] = useState(contract);
+
   const [fCards, setFcards] = useState();
+
+  const [load, setLoad] = useState(false);
   useEffect(() => {
     setPercent(50);
   }, [percent]);
 
+  /*
   useEffect(() => {
-    if (typeof fContract != "undefined") {
-      console.log(fContract);
-      fContract.getMyDonateAmount().then((e) => {
-        setMyValue(ethers.utils.formatEther(e));
-        console.log(e, "hi");
-      });
-    }
-  }, [contract]);
+    const getContract = async () => {
+      const value = await contract.getMyDonateAmount();
+      console.log(ethers.utils.formatEther(value));
+    };
+    getContract();
+  }, []);
+  */
 
   useEffect(() => {
     console.log(fCards);
@@ -86,6 +88,7 @@ function DonateCard({ cards, contract }) {
 
     console.log(fundPrice);
   };
+
   const onPriceButton = (e) => {
     if (fundPrice == "") {
       setFundPrice(e.target.value);
@@ -99,12 +102,16 @@ function DonateCard({ cards, contract }) {
     try {
       const contractWithSigner = contract.connect(signer);
       contractWithSigner
-        .donate(BigInt(1000000000000000000), {
+        .donate(BigInt(1000000000000000000 * fundPrice), {
           from: address,
 
-          value: "1000000000000000000",
+          value: `${1000000000000000000 * fundPrice}`,
         })
-        .then(console.log);
+        .then((e) => {
+          console.log(e);
+          alert("기부되었습니다!");
+          window.history.back();
+        });
     } catch (e) {
       console.log(e);
     }
@@ -132,7 +139,10 @@ function DonateCard({ cards, contract }) {
             <TagetDivBox>
               <div>모금 진행률</div>
               <Target2>
-                {(data?.formatted / cards.p_funding_target_amont) * 100}%
+                {Math.round(
+                  (data?.formatted / cards.p_funding_target_amont) * 100
+                )}
+                %
               </Target2>
             </TagetDivBox>
           </TargetWrap>
@@ -150,7 +160,9 @@ function DonateCard({ cards, contract }) {
               <Image src={MyIcon} layout="fixed" alt="banner" />
               <TagetDivBox>
                 <div>나의 기여도</div>
-                <Target2>0.07%</Target2>
+                <Target2>
+                  {Math.round((data?.formatted / myValue) * 100)}%
+                </Target2>
               </TagetDivBox>
             </TargetWrap>
           </DonateRange>
@@ -194,7 +206,7 @@ function DonateCard({ cards, contract }) {
         )}
         <DonateTime>
           <TimeTitle>종료까지 남은 시간</TimeTitle>
-          <TimeLeft>{lastday}/00일 00시 00분 00초</TimeLeft>
+          <TimeLeft>{lastday}</TimeLeft>
         </DonateTime>
         <DonateButton onClick={onDonate}>기부하기</DonateButton>
       </CardWrap>
