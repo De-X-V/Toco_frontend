@@ -5,6 +5,7 @@ import Image from "next/image";
 
 import Logo from "../../public/logo3.png";
 import Profile from "../../public/profile.png";
+import unconnect from "../../public/unconnect.png";
 
 import { useAccount, useConnect, useDisconnect } from "wagmi";
 import { InjectedConnector } from "wagmi/connectors/injected";
@@ -61,7 +62,7 @@ function AppBar() {
       {!walletConnect ? (
         <>
           <StyledProfile onClick={() => connect()}>
-            <Image src={Profile} width="40px" height="40px" />
+            <Image src={unconnect} width="40px" height="40px" />
           </StyledProfile>
         </>
       ) : (
