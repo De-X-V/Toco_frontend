@@ -131,7 +131,7 @@ function DonateCard({ cards, contract, myValue, lastday }) {
             <Image src={Icon} layout="fixed" alt="banner" />
             <TagetDivBox>
               <div>누적 모금액</div>
-              <Target2>{data?.formatted}ETH</Target2>
+              <Target2>{Math.round(data?.formatted * 1000) / 1000}ETH</Target2>
             </TagetDivBox>
           </TargetWrap>
           <TargetWrap>
@@ -153,7 +153,7 @@ function DonateCard({ cards, contract, myValue, lastday }) {
               <Image src={MyIcon} layout="fixed" alt="banner" />
               <TagetDivBox>
                 <div>나의 기부액</div>
-                <Target2>{myValue} ETH</Target2>
+                <Target2>{Math.round(myValue * 1000) / 1000} ETH</Target2>
               </TagetDivBox>
             </TargetWrap>
             <TargetWrap>
@@ -161,7 +161,7 @@ function DonateCard({ cards, contract, myValue, lastday }) {
               <TagetDivBox>
                 <div>나의 기여도</div>
                 <Target2>
-                  {Math.round((data?.formatted / myValue) * 100)}%
+                  {Math.round((myValue / data?.formatted) * 100)}%
                 </Target2>
               </TagetDivBox>
             </TargetWrap>
