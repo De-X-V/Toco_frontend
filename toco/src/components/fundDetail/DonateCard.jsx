@@ -10,17 +10,22 @@ import { getLastTime } from "../../hooks/getLastTime";
 import { getDday } from "../../hooks/getDday";
 
 function DonateCard({ cards, contract, myValue, lastday }) {
-  const [percent, setPercent] = useState(75);
+  const [percent, setPercent] = useState();
   const [fundPrice, setFundPrice] = useState("");
 
   const [fContract, setFcontract] = useState(contract);
 
   const [fCards, setFcards] = useState();
+  //const [valueData, setValueData] = useState(data);
 
   const [load, setLoad] = useState(false);
   useEffect(() => {
-    setPercent(50);
-  }, [percent]);
+    const newPercent = Math.round(
+      (data?.formatted / cards.p_funding_target_amont) * 100
+    );
+    console.log(newPercent);
+    setPercent(newPercent);
+  }, []);
 
   /*
   useEffect(() => {
@@ -161,7 +166,10 @@ function DonateCard({ cards, contract, myValue, lastday }) {
               <TagetDivBox>
                 <div>나의 기여도</div>
                 <Target2>
-                  {Math.round((myValue / data?.formatted) * 100)}%
+                  {Math.round((myValue / data?.formatted) * 100)
+                    ? Math.round((myValue / data?.formatted) * 100)
+                    : 0}
+                  %
                 </Target2>
               </TagetDivBox>
             </TargetWrap>
@@ -171,7 +179,9 @@ function DonateCard({ cards, contract, myValue, lastday }) {
         )}
         <ProgressWrap>
           <ProgressBar>
-            <Progress percent={percent}></Progress>
+            <Progress
+              percent={(data?.formatted / cards.p_funding_target_amont) * 100}
+            ></Progress>
           </ProgressBar>
         </ProgressWrap>
 
