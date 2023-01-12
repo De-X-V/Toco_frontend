@@ -9,7 +9,7 @@ import { ethers } from "ethers";
 import { getLastTime } from "../../hooks/getLastTime";
 import { getDday } from "../../hooks/getDday";
 
-function DonateCard({ cards, contract, myValue, lastday }) {
+function DonateCard({ cards, contract, myValue, lastday, contractValue }) {
   const [percent, setPercent] = useState();
   const [fundPrice, setFundPrice] = useState("");
 
@@ -17,15 +17,16 @@ function DonateCard({ cards, contract, myValue, lastday }) {
 
   const [fCards, setFcards] = useState();
   //const [valueData, setValueData] = useState(data);
+  const [percent2, setPercent2] = useState(contractValue);
 
   const [load, setLoad] = useState(false);
   useEffect(() => {
     const newPercent = Math.round(
-      (data?.formatted / cards.p_funding_target_amont) * 100
+      (percent2 / cards.p_funding_target_amont) * 100
     );
     console.log(newPercent);
     setPercent(newPercent);
-  }, []);
+  }, [percent2]);
 
   /*
   useEffect(() => {
@@ -78,9 +79,12 @@ function DonateCard({ cards, contract, myValue, lastday }) {
   const [_connectors, _setConnectors] = useState([]);
 
   const { data, isError, isLoading } = useBalance({
-    address: cards.p_funding_ca,
+    address: "0x1FE58484D60615801452a150c4787C7ac4EA315f",
     //address: `${address}`,
     chainId: 1,
+    onError(error) {
+      console.log("Error", error);
+    },
   });
 
   useEffect(() => {
@@ -136,7 +140,7 @@ function DonateCard({ cards, contract, myValue, lastday }) {
             <Image src={Icon} layout="fixed" alt="banner" />
             <TagetDivBox>
               <div>누적 모금액</div>
-              <Target2>{Math.round(data?.formatted * 1000) / 1000}ETH</Target2>
+              <Target2>{Math.round(contractValue * 1000) / 1000}ETH</Target2>
             </TagetDivBox>
           </TargetWrap>
           <TargetWrap>
@@ -145,7 +149,7 @@ function DonateCard({ cards, contract, myValue, lastday }) {
               <div>모금 진행률</div>
               <Target2>
                 {Math.round(
-                  (data?.formatted / cards.p_funding_target_amont) * 100
+                  (contractValue / cards.p_funding_target_amont) * 100
                 )}
                 %
               </Target2>
@@ -166,8 +170,8 @@ function DonateCard({ cards, contract, myValue, lastday }) {
               <TagetDivBox>
                 <div>나의 기여도</div>
                 <Target2>
-                  {Math.round((myValue / data?.formatted) * 100)
-                    ? Math.round((myValue / data?.formatted) * 100)
+                  {Math.round((myValue / contractValue) * 100)
+                    ? Math.round((myValue / contractValue) * 100)
                     : 0}
                   %
                 </Target2>
@@ -180,7 +184,7 @@ function DonateCard({ cards, contract, myValue, lastday }) {
         <ProgressWrap>
           <ProgressBar>
             <Progress
-              percent={(data?.formatted / cards.p_funding_target_amont) * 100}
+              percent={(contractValue / cards.p_funding_target_amont) * 100}
             ></Progress>
           </ProgressBar>
         </ProgressWrap>

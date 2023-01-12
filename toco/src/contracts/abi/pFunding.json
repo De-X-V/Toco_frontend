@@ -25,9 +25,21 @@
     "constant": true
   },
   {
-    "inputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
     "name": "donateList",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
     "stateMutability": "view",
     "type": "function",
     "constant": true
@@ -36,13 +48,26 @@
     "inputs": [],
     "name": "newFunding",
     "outputs": [
-      { "internalType": "string", "name": "fundingName", "type": "string" },
+      {
+        "internalType": "string",
+        "name": "fundingName",
+        "type": "string"
+      },
       {
         "internalType": "uint256",
         "name": "fundingStartDate",
         "type": "uint256"
       },
-      { "internalType": "uint256", "name": "fundingEndDate", "type": "uint256" }
+      {
+        "internalType": "uint256",
+        "name": "fundingEndDate",
+        "type": "uint256"
+      },
+      {
+        "internalType": "string",
+        "name": "docId",
+        "type": "string"
+      }
     ],
     "stateMutability": "view",
     "type": "function",
@@ -50,7 +75,11 @@
   },
   {
     "inputs": [
-      { "internalType": "string", "name": "_fundingName", "type": "string" },
+      {
+        "internalType": "string",
+        "name": "_fundingName",
+        "type": "string"
+      },
       {
         "internalType": "uint256",
         "name": "_fundingStartDate",
@@ -60,6 +89,11 @@
         "internalType": "uint256",
         "name": "_fundingEndDate",
         "type": "uint256"
+      },
+      {
+        "internalType": "string",
+        "name": "_docId",
+        "type": "string"
       }
     ],
     "name": "setFunding",
@@ -86,7 +120,11 @@
     "outputs": [
       {
         "components": [
-          { "internalType": "string", "name": "fundingName", "type": "string" },
+          {
+            "internalType": "string",
+            "name": "fundingName",
+            "type": "string"
+          },
           {
             "internalType": "uint256",
             "name": "fundingStartDate",
@@ -96,6 +134,11 @@
             "internalType": "uint256",
             "name": "fundingEndDate",
             "type": "uint256"
+          },
+          {
+            "internalType": "string",
+            "name": "docId",
+            "type": "string"
           }
         ],
         "internalType": "struct ProjectFunding.funding",
@@ -109,7 +152,11 @@
   },
   {
     "inputs": [
-      { "internalType": "uint256", "name": "_amount", "type": "uint256" }
+      {
+        "internalType": "uint256",
+        "name": "_amount",
+        "type": "uint256"
+      }
     ],
     "name": "donate",
     "outputs": [],
@@ -120,24 +167,44 @@
   {
     "inputs": [],
     "name": "getBalance",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
     "stateMutability": "view",
     "type": "function",
     "constant": true
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "_user", "type": "address" }
+      {
+        "internalType": "address",
+        "name": "_user",
+        "type": "address"
+      }
     ],
     "name": "getMyDonateAmount",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
     "stateMutability": "view",
     "type": "function",
     "constant": true
   },
   {
     "inputs": [
-      { "internalType": "address payable", "name": "_to", "type": "address" }
+      {
+        "internalType": "address payable",
+        "name": "_to",
+        "type": "address"
+      }
     ],
     "name": "withdrawMoney",
     "outputs": [],

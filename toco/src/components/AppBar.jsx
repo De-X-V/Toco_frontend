@@ -47,28 +47,25 @@ function AppBar() {
         <Link href="/PennyFund">
           <StyledLink>잔돈펀딩</StyledLink>
         </Link>
-        <Link
-          href="https://toco-p0t6di8p0-toco-minting-page.vercel.app/"
-          passHref
-        >
+        <Link href="https://toco-minting-page.vercel.app/" passHref>
           <StyledA target="_blank" rel="noopener noreferrer">
             NFT
           </StyledA>
         </Link>
         <Link href="/MyPage">
-          <StyledLink>mypage</StyledLink>
+          <StyledLink>Mypage</StyledLink>
         </Link>
       </StyledLinkBox>
       {!walletConnect ? (
         <>
           <StyledProfile onClick={() => connect()}>
-            <Image src={unconnect} width="40px" height="40px" />
+            <Image src={Profile} width="40px" height="40px" />
           </StyledProfile>
         </>
       ) : (
         <>
           <StyledProfile2 onClick={() => disconnect()}>
-            <Image src={Profile} width="40px" height="40px" />
+            <Image src={unconnect} width="40px" height="40px" />
           </StyledProfile2>
         </>
       )}

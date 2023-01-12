@@ -41,9 +41,7 @@ export default function Account() {
     contract.methods
       .getFunding()
       .call()
-      .then((a) => {
-        console.log("연결 완료", a);
-      });
+      .then((a) => {});
   });
   return (
     <Wrap>

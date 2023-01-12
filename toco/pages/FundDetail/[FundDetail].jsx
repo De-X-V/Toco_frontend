@@ -23,6 +23,7 @@ function FundDetail() {
   const [contract, setContact] = useState();
   const [myValue, setMyValue] = useState();
   const [lastday, setLastDay] = useState();
+  const [contractValue, setContractValue] = useState();
   const { address, isConnected } = useAccount();
 
   const getContract = async (pFundingAddress) => {
@@ -54,12 +55,23 @@ function FundDetail() {
               setMyValue(ethers.utils.formatEther(e));
               console.log(ethers.utils.formatEther(e), "hi");
             });
+
+          data.getBalance().then((e) => {
+            setContractValue(ethers.utils.formatEther(e));
+            console.log(ethers.utils.formatEther(e), "hi");
+          });
         });
       } else {
         console.log("No such document!");
       }
     });
   }, [router.isReady, cardLink]);
+  if (result == "changeFund")
+    return (
+      <Wrap>
+        <UnDevelop>추후 개발 예정입니다.</UnDevelop>
+      </Wrap>
+    );
 
   return (
     <Wrap>
@@ -70,6 +82,7 @@ function FundDetail() {
           contract={contract}
           myValue={myValue}
           lastday={lastday}
+          contractValue={contractValue}
         ></DonateCard>
       </>
     </Wrap>
@@ -81,6 +94,15 @@ const Wrap = styled.div`
 
   justify-content: center;
   margin-top: 100px;
+`;
+
+const UnDevelop = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 100px;
+  margin-bottom: 100px;
 `;
 
 export default FundDetail;

@@ -36,6 +36,7 @@ function PennyFundList() {
               imgSrc={card.c_funding_images}
               title={card.c_funding_title}
               id={card.c_funding_id}
+              linkId={"changeFund"}
               date={getDday(card.c_funding_end_date)}
               amount={card.c_funding_target_amont}
               status={card.c_funding_status}

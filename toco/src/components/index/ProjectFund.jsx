@@ -53,8 +53,9 @@ export default function ProjectFund() {
         <StyledDiv>
           <LeftButton onClick={handleClick2}>&lt;</LeftButton>
           <Container ref={scrollRef}>
-            {users.map((card) => (
+            {users.map((card, i) => (
               <FundCard
+                key={i}
                 imgSrc={card.p_funding_images}
                 title={card.p_funding_title}
                 id={card.p_funding_id}
