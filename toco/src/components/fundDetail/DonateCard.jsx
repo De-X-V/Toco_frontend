@@ -102,7 +102,8 @@ function DonateCard({ cards, contract, myValue, lastday, contractValue }) {
     if (fundPrice == "") {
       setFundPrice(e.target.value);
     } else {
-      setFundPrice(parseFloat(fundPrice) + parseFloat(e.target.value));
+      const newNum = parseFloat(fundPrice) + parseFloat(e.target.value);
+      setFundPrice(newNum.toFixed(3));
     }
   };
   const onDonate = () => {
@@ -198,7 +199,7 @@ function DonateCard({ cards, contract, myValue, lastday, contractValue }) {
             <StyledInput
               onChange={onPriceChange}
               value={fundPrice}
-              placeholder="금액 입력하기"
+              placeholder="금액 입력하기(소수점 3자리 수 까지 가능합니다)"
             ></StyledInput>
             <ButtonWrap>
               <StyledButton value={0.1} onClick={onPriceButton}>
