@@ -28,7 +28,7 @@ function MyPage() {
         .then((docs) => {
           docs.forEach((doc) => {
             if (doc.exists) {
-              tempArray.push(doc.data());
+              tempArray.push({ ...doc.data(), id: doc.id });
             }
           });
           setData(tempArray);
